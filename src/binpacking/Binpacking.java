@@ -6,6 +6,8 @@
 
 package binpacking;
 
+import java.awt.Color;
+import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
@@ -19,7 +21,9 @@ public class Binpacking {
 
     public Binpacking() {
         mainFrm = new JFrame("Bin Pacing");
+        mainFrm.setLayout(new FlowLayout());
         addButtons();
+        mainFrm.pack();
         mainFrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrm.setVisible(true);        
     }
@@ -34,7 +38,9 @@ public class Binpacking {
         int totButns=3;
         JButton butArr[] = new JButton[totButns];
         for( int lmt=0 ; lmt < totButns ; lmt++ ){
-            
+            butArr[lmt]=new JButton("System "+(lmt+1));
+            butArr[lmt].setBackground(Color.red);
+            mainFrm.add(butArr[lmt]);
         }
     }
     
