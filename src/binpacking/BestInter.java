@@ -7,8 +7,11 @@ package binpacking;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.LayoutManager;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -32,15 +35,25 @@ public class BestInter {
         lod.setLocation(((start.getWidth()/2)-(lod.getWidth()/2)),
                 ((start.getHeight()/2)-(lod.getHeight()/2)));
         start.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        start.setVisible(true);
-        
-        
-        
+        start.setVisible(true);        
     }
     
     public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException{
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         BestInter b = new BestInter();
+        b.buttonListen();
+        
+    }
+    void buttonListen(){
+        lod.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                final JFileChooser fc = new JFileChooser();
+                int fileChosen = fc.showOpenDialog(start);
+            }
+        });
+        
     }
     
 }
