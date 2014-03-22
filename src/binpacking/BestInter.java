@@ -6,8 +6,12 @@ package binpacking;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.LayoutManager;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -19,24 +23,23 @@ public class BestInter {
     JButton lod;
     
     BestInter(){
-        start = new JFrame("Load GUI");
-        start.setLayout(new BorderLayout());
-        
+        start = new JFrame("Choose File");
+        start.getContentPane().setLayout(null);
+        start.setSize(new Dimension(500,400));
         lod = new JButton("Load");
-        Dimension dim = new Dimension(500,400);
-        Dimension dim1 = new Dimension(10,5);
-        lod.setSize(dim1);
-        start.add(lod,BorderLayout.CENTER);
+        lod.setSize(new Dimension(80,50));
+        start.getContentPane().add(lod);        
+        lod.setLocation(((start.getWidth()/2)-(lod.getWidth()/2)),
+                ((start.getHeight()/2)-(lod.getHeight()/2)));
         start.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        start.setSize(dim);
         start.setVisible(true);
         
         
         
     }
     
-    public static void main(String[] args){
-        
+    public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException{
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         BestInter b = new BestInter();
     }
     
