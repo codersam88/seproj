@@ -21,7 +21,8 @@ public class PMmodifier {
         }
     }
     protected void addVM(int capy){
-        for(int i=0;i<PMlist.size();i++){
+        int i=0;
+        for(;i<PMlist.size();i++){
             if(((PMstruct)PMlist.get(i)).resCap >= capy){
                 VMstruct temp = new VMstruct();
                 temp.VM_ID = genVMID();
@@ -29,6 +30,9 @@ public class PMmodifier {
                 ((PMstruct)PMlist.get(i)).VMlist.add(temp);
                 break;
             }
+        }
+        if(i==PMlist.size()+1){
+            
         }
         
     }
