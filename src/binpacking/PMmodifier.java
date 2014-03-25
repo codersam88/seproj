@@ -36,8 +36,20 @@ public class PMmodifier {
         }
         
     }
-    protected void addVM(int PM_ID,int VM_ID, int cap){
-        
+    protected void addVM(String VM_ID, int capy){
+        int i=0;
+        for(;i<PMlist.size();i++){
+            if(((PMstruct)PMlist.get(i)).resCap >= capy){
+                VMstruct temp = new VMstruct();
+                temp.VM_ID = VM_ID;
+                temp.cap = capy;
+                ((PMstruct)PMlist.get(i)).VMlist.add(temp);
+                break;
+            }
+        }
+        if(i==PMlist.size()+1){
+            
+        }
     }
     
     String genVMID(){
