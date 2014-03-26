@@ -62,5 +62,16 @@ public class PMmodifier {
         }
         return VM_ID;
     }
+    
+    void deleteVM(String VM_ID){
+        
+        for(int i=0;i<PMlist.size();i++){
+            for(int j=0;j<((PMstruct)PMlist.get(i)).VMlist.size();j++){ 
+                if((VMstruct((PMstruct)PMlist.get(i)).VMlist.))
+            
+            } 
+            break;
+        }
+    }
 }
 
