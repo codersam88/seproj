@@ -26,11 +26,12 @@ public class PMmodifier {
     
     public static void main(String[] args){
         PMmodifier pm = new PMmodifier();
-        pm.initPMs(5);
+        pm.initPMs(1);
         pm.addVM("VM 1", 20);
         pm.addVM("VM 2",90);
         pm.addVM("VM 3", 50);
         pm.addVM("VM 4", 60);
+        pm.addVM("VM 5", 60);
     }
     
     protected void addVM(String VM_ID, int capy){
@@ -50,8 +51,8 @@ public class PMmodifier {
                 break;
             }
         }
-        if(i==PMlist.size()+1){
-            
+        if(i==PMlist.size()){
+            System.out.println("sorry no enough space");
         }
         
     }
