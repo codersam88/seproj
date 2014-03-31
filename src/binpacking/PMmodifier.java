@@ -19,6 +19,7 @@ public class PMmodifier {
         PMlist = new LinkedList();
         for(int i = 0;i<totalPMs;i++){
             PMlist.add(new PMstruct());
+            ((PMstruct)PMlist.get(i)).PM_NO=i+1;
         }
         System.out.println("the size of list is "+PMlist.size());
     }
@@ -27,23 +28,11 @@ public class PMmodifier {
         PMmodifier pm = new PMmodifier();
         pm.initPMs(5);
         pm.addVM("VM 1", 20);
+        pm.addVM("VM 2",90);
+        pm.addVM("VM 3", 50);
+        pm.addVM("VM 4", 60);
     }
-    protected void addVM(int capy){
-        int i=0;
-        for(;i<PMlist.size();i++){
-            if(((PMstruct)PMlist.get(i)).resCap >= capy){
-                VMstruct temp = new VMstruct();
-                temp.VM_ID = genVMID();
-                temp.cap = capy;
-                ((PMstruct)PMlist.get(i)).VMlist.add(temp);
-                break;
-            }
-        }
-        if(i==PMlist.size()+1){
-            
-        }
-        
-    }
+    
     protected void addVM(String VM_ID, int capy){
         int i=0;
         for(;i<PMlist.size();i++){
@@ -52,12 +41,19 @@ public class PMmodifier {
                 temp.VM_ID = VM_ID;
                 temp.cap = capy;
                 ((PMstruct)PMlist.get(i)).VMlist.add(temp);
+                ((PMstruct)PMlist.get(i)).resCap=
+                        ((PMstruct)PMlist.get(i)).resCap-capy;
+                System.out.println("VM has been added in pm no "+ 
+                        ((PMstruct)PMlist.get(i)).PM_NO);
+                System.out.println("the residual cap of pm is "+ 
+                        ((PMstruct)PMlist.get(i)).resCap);
                 break;
             }
         }
         if(i==PMlist.size()+1){
             
         }
+        
     }
     
     String genVMID(){
