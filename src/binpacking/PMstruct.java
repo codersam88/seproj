@@ -13,8 +13,14 @@ import java.util.LinkedList;
  * @author sam
  */
 public class PMstruct {
-    private int PM_ID;
+    private int PM_NO;
     private PMstruct PMlist;
     LinkedList VMlist;
     int resCap=100;
+
+    public PMstruct() {
+        VMlist = new LinkedList();
+    }
+    
+    
 }

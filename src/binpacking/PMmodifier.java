@@ -16,9 +16,17 @@ public class PMmodifier {
     private LinkedList VMlist;
     int VM_num=0;
     void initPMs(int totalPMs){
+        PMlist = new LinkedList();
         for(int i = 0;i<totalPMs;i++){
             PMlist.add(new PMstruct());
         }
+        System.out.println("the size of list is "+PMlist.size());
+    }
+    
+    public static void main(String[] args){
+        PMmodifier pm = new PMmodifier();
+        pm.initPMs(5);
+        pm.addVM("VM 1", 20);
     }
     protected void addVM(int capy){
         int i=0;
@@ -67,7 +75,7 @@ public class PMmodifier {
         
         for(int i=0;i<PMlist.size();i++){
             for(int j=0;j<((PMstruct)PMlist.get(i)).VMlist.size();j++){ 
-                if((VMstruct((PMstruct)PMlist.get(i)).VMlist.))
+//                if((VMstruct((PMstruct)PMlist.get(i)).VMlist.))
             
             } 
             break;
