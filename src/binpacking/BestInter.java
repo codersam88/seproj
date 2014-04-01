@@ -26,7 +26,8 @@ public class BestInter {
     JFrame start;
     JButton lod;
     
-    BestInter(){
+    BestInter() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException{
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         start = new JFrame("Choose File");
         start.getContentPane().setLayout(null);
         start.setSize(new Dimension(500,400));
@@ -39,8 +40,8 @@ public class BestInter {
         start.setVisible(true);        
     }
     
-    public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException{
-        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+    public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+        
         BestInter b = new BestInter();
         b.buttonListen();
         
