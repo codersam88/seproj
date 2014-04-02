@@ -22,7 +22,7 @@ public class Parse {
         p.parseFile();
     }
     void parseFile() throws IOException{
-        Path  fPath = Paths.get("test.txt");
+        Path  fPath = Paths.get("test2");
         Scanner scan = new Scanner(fPath);
         //scan.useDelimiter("|");
         for(;scan.hasNextLine();){
@@ -33,7 +33,7 @@ public class Parse {
     
     void parseCurrLine(String li){
         Scanner scanL = new Scanner(li);
-        scanL.useDelimiter("|");
+        scanL.useDelimiter("=");
         if(scanL.hasNext()){
             String VM_ID = scanL.next();
             String cap = scanL.next();
