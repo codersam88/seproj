@@ -20,12 +20,12 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class BestInter2 {
     
     public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException{
-        
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         BestInter2 b2 = new BestInter2();
     }
     PMmodifier pmr;
     JFrame mainWind;
-    int noOfPMs;
+    final int noOfPMs=6;
     Dimension butDim = new Dimension(150,200);
 
     public BestInter2() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
@@ -43,7 +43,7 @@ public class BestInter2 {
     
     void createPMs(){
         //int noOfPMs=pmr.getPMCount();
-        noOfPMs=4;
+        
         Button[] PMArr = new Button[noOfPMs];
         for(int i=0; i < PMArr.length; i++){
             PMArr[i] = new Button("PM_NO"+i);

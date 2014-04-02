@@ -6,6 +6,9 @@
 
 package binpacking;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 /**
@@ -14,19 +17,21 @@ import java.util.Scanner;
  */
 public class Parse {
     
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException{
         Parse p = new Parse();
         p.parseFile();
     }
-    void parseFile(){
-        String path = "/test.txt";
-        Scanner scan = new Scanner(path);
+    void parseFile() throws IOException{
+        Path  fPath = Paths.get("test.txt");
+        Scanner scan = new Scanner(fPath);
         scan.useDelimiter("|");
+        System.out.println(scan.next()+scan.next()+scan.next()+scan.next()+scan.next());
+        /*scan.useDelimiter("|");
         for(;scan.hasNext();){
             String VM_ID = scan.next();
             int cap = Integer.parseInt(scan.next());
             System.out.println(VM_ID+" "+cap);
-        }
+        }*/
         
     }
 }
