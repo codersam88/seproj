@@ -17,6 +17,7 @@ public class PMstruct {
     private PMstruct PMlist;
     LinkedList VMlist;
     int resCap=100;
+    boolean onState=false;
 
     public PMstruct() {
         VMlist = new LinkedList();

@@ -52,6 +52,9 @@ public class PMmodifier {
         }*/
         for(;i<PMlist.size();i++){
             if(((PMstruct)PMlist.get(i)).resCap >= capy){
+                if(!((PMstruct)PMlist.get(i)).onState){
+                    ((PMstruct)PMlist.get(i)).onState=true;
+                }
                 VMstruct temp = new VMstruct();
                 temp.VM_ID = VM_ID;
                 temp.cap = capy;
