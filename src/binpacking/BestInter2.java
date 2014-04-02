@@ -25,7 +25,7 @@ public class BestInter2 {
     }
     PMmodifier pmr;
     JFrame mainWind;
-    final int noOfPMs=6;
+    final int noOfPMs=2;
     Dimension butDim = new Dimension(150,200);
 
     public BestInter2() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {

@@ -10,6 +10,9 @@ import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -55,6 +58,11 @@ public class BestInter {
                 int isFileChosen = fc.showOpenDialog(start);
                 if(isFileChosen == JFileChooser.APPROVE_OPTION){
                     File fil = fc.getSelectedFile();
+                    try {
+                        new Parse(fil);
+                    } catch (IOException ex) {
+                        Logger.getLogger(BestInter.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     
                 }
                 

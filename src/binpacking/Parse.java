@@ -6,6 +6,7 @@
 
 package binpacking;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,14 +17,23 @@ import java.util.Scanner;
  * @author sam
  */
 public class Parse {
+    Path pth;
+    PMmodifier pmr;
+
+    public Parse(File fil) throws IOException {
+        pth = fil.toPath();
+        parseFile();
+        pmr = new PMmodifier();
+        
+    }
+    
+    
     
     public static void main(String[] args) throws IOException{
-        Parse p = new Parse();
-        p.parseFile();
+        
     }
     void parseFile() throws IOException{
-        Path  fPath = Paths.get("test2");
-        Scanner scan = new Scanner(fPath);
+        Scanner scan = new Scanner(pth);
         //scan.useDelimiter("|");
         for(;scan.hasNextLine();){
                 parseCurrLine(scan.nextLine());
@@ -36,7 +46,8 @@ public class Parse {
         scanL.useDelimiter("=");
         if(scanL.hasNext()){
             String VM_ID = scanL.next();
-            String cap = scanL.next();
+            int cap = Integer.parseInt(scanL.next());
+            pmr.addVM(VM_ID, cap);
             System.out.println(VM_ID+" "+cap);
             
         }

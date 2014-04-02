@@ -15,6 +15,13 @@ public class PMmodifier {
     private LinkedList PMlist;
     private LinkedList VMlist;
     int VM_num=0;
+
+    public PMmodifier() {
+        initPMs(PM_ID);
+        
+    }
+    
+    
     void initPMs(int totalPMs){
         PMlist = new LinkedList();
         for(int i = 0;i<totalPMs;i++){
@@ -36,11 +43,11 @@ public class PMmodifier {
     
     protected void addVM(String VM_ID, int capy){
         int i=0;
-        for(;i<PMlist.size();i++){
+        /*for(;i<PMlist.size();i++){
             for(int j=0;j<((PMstruct)PMlist.get(i)).VMlist.size();j++){
                 
             }
-        }
+        }*/
         for(;i<PMlist.size();i++){
             if(((PMstruct)PMlist.get(i)).resCap >= capy){
                 VMstruct temp = new VMstruct();
