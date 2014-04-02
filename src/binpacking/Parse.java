@@ -21,9 +21,10 @@ public class Parse {
     PMmodifier pmr;
 
     public Parse(File fil) throws IOException {
+        pmr = new PMmodifier();
         pth = fil.toPath();
         parseFile();
-        pmr = new PMmodifier();
+        
         
     }
     
@@ -35,9 +36,9 @@ public class Parse {
     void parseFile() throws IOException{
         Scanner scan = new Scanner(pth);
         //scan.useDelimiter("|");
-        for(;scan.hasNextLine();){
+        //for(;scan.hasNextLine();){
                 parseCurrLine(scan.nextLine());
-        }
+        //}
         
     }
     

@@ -11,13 +11,14 @@ import java.util.LinkedList;
  * @author mc13mt49
  */
 public class PMmodifier {
+    private final int pmCount=6;
     private int PM_ID;
     private LinkedList PMlist;
     private LinkedList VMlist;
     int VM_num=0;
 
     public PMmodifier() {
-        initPMs(PM_ID);
+        initPMs(pmCount);
         
     }
     
@@ -33,7 +34,7 @@ public class PMmodifier {
     
     public static void main(String[] args){
         PMmodifier pm = new PMmodifier();
-        pm.initPMs(1);
+        
         pm.addVM("VM 1", 20);
         pm.addVM("VM 2",90);
         pm.addVM("VM 3", 50);
