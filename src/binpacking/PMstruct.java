@@ -13,7 +13,7 @@ import java.util.LinkedList;
  * @author sam
  */
 public class PMstruct {
-    int PM_NO;
+    String PM_NO;
     private PMstruct PMlist;
     LinkedList VMlist;
     int resCap=100;

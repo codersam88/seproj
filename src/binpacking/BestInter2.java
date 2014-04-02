@@ -25,7 +25,7 @@ public class BestInter2 {
     }
     PMmodifier pmr;
     JFrame mainWind;
-    final int noOfPMs=2;
+    
     Dimension butDim = new Dimension(150,200);
 
     public BestInter2() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
@@ -35,13 +35,15 @@ public class BestInter2 {
         mainWind.setSize(600,600);
         mainWind.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainWind.getContentPane().setLayout(new FlowLayout());
-        createPMs();
-        setFrameSize();
+        pmr= new PMmodifier();
+        buildGUI();
+        
+        
         //mainWind.pack();
         mainWind.setVisible(true);
     }
     
-    void createPMs(){
+    void createPMs(int noOfPMs){
         //int noOfPMs=pmr.getPMCount();
         
         Button[] PMArr = new Button[noOfPMs];
@@ -54,10 +56,20 @@ public class BestInter2 {
     }
     
     
-    void setFrameSize(){
+    void setFrameSize(int noOfPMs){
         int framWidth = (noOfPMs*(butDim.height))+10;
         mainWind.setSize(framWidth,400 );
     }
     
+    void buildGUI(){
+        int PMCount = pmr.getPMCount();
+        String[] PM_IDs= new String[PMCount];
+        for(int i=0; i< PMCount; i++){
+            PM_IDs[i] = pmr.getPMID(i);
+        }
+        createPMs(PMCount);
+        setFrameSize(PMCount);
+        System.out.println("PM count id " +PMCount);
+    }
     
 }

@@ -40,6 +40,7 @@ public class BestInter {
         lod.setLocation(((start.getWidth()/2)-(lod.getWidth()/2)),
                 ((start.getHeight()/2)-(lod.getHeight()/2)));
         start.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        buttonListen();
         start.setVisible(true);        
     }
     
@@ -60,7 +61,17 @@ public class BestInter {
                     File fil = fc.getSelectedFile();
                     try {
                         new Parse(fil);
+                        start.dispose();
+                        new BestInter2();
                     } catch (IOException ex) {
+                        Logger.getLogger(BestInter.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(BestInter.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (InstantiationException ex) {
+                        Logger.getLogger(BestInter.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IllegalAccessException ex) {
+                        Logger.getLogger(BestInter.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (UnsupportedLookAndFeelException ex) {
                         Logger.getLogger(BestInter.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     

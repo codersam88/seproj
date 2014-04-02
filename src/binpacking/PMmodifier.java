@@ -11,6 +11,7 @@ import java.util.LinkedList;
  * @author mc13mt49
  */
 public class PMmodifier {
+    final int noOfPMs=2;
     private final int pmCount=6;
     private int PM_ID;
     private LinkedList PMlist;
@@ -27,7 +28,7 @@ public class PMmodifier {
         PMlist = new LinkedList();
         for(int i = 0;i<totalPMs;i++){
             PMlist.add(new PMstruct());
-            ((PMstruct)PMlist.get(i)).PM_NO=i+1;
+            ((PMstruct)PMlist.get(i)).PM_NO="PM_"+i+1;
         }
         System.out.println("the size of list is "+PMlist.size());
     }
@@ -94,6 +95,9 @@ public class PMmodifier {
     
     int getPMCount(){
         return PMlist.size();
+    }
+    String getPMID(int i){
+        return ((PMstruct)PMlist.get(i)).PM_NO;
     }
 }
 

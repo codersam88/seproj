@@ -49,6 +49,7 @@ public class Parse {
             String VM_ID = scanL.next();
             int cap = Integer.parseInt(scanL.next());
             pmr.addVM(VM_ID, cap);
+            
             System.out.println(VM_ID+" "+cap);
             
         }
