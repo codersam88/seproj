@@ -52,9 +52,11 @@ public class PMmodifier {
         }*/
         for(;i<PMlist.size();i++){
             if(((PMstruct)PMlist.get(i)).resCap >= capy){
-                if(!((PMstruct)PMlist.get(i)).onState){
+                //if(!((PMstruct)PMlist.get(i)).onState){
+                    System.err.println("changing state");
                     ((PMstruct)PMlist.get(i)).onState=true;
-                }
+                    System.err.println(((PMstruct)PMlist.get(i)).onState);
+                //}
                 VMstruct temp = new VMstruct();
                 temp.VM_ID = VM_ID;
                 temp.cap = capy;
@@ -101,6 +103,11 @@ public class PMmodifier {
     }
     String getPMID(int i){
         return ((PMstruct)PMlist.get(i)).PM_NO;
+    }
+    
+    boolean getOnStatus(int i){
+        System.out.println("in geton "+((PMstruct)PMlist.get(i)).onState);
+        return ((PMstruct)PMlist.get(i)).onState;
     }
 }
 

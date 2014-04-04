@@ -50,6 +50,10 @@ public class BestInter2 {
         for(int i=0; i < PMArr.length; i++){
             PMArr[i] = new Button("PM_NO"+i);
             PMArr[i].setPreferredSize(butDim);
+            if(!pmr.getOnStatus(i)){
+                PMArr[i].disable();
+                //System.out.println("the "+i+" th pm is "+pmr.getOnStatus(i));
+            }
             mainWind.add(PMArr[i]);
             
         }
@@ -67,9 +71,13 @@ public class BestInter2 {
         for(int i=0; i< PMCount; i++){
             PM_IDs[i] = pmr.getPMID(i);
         }
+        
         createPMs(PMCount);
+        
         setFrameSize(PMCount);
         System.out.println("PM count id " +PMCount);
     }
+    
+    
     
 }

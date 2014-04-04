@@ -36,9 +36,9 @@ public class Parse {
     void parseFile() throws IOException{
         Scanner scan = new Scanner(pth);
         //scan.useDelimiter("|");
-        //for(;scan.hasNextLine();){
+        for(;scan.hasNextLine();){
                 parseCurrLine(scan.nextLine());
-        //}
+        }
         
     }
     
@@ -48,9 +48,10 @@ public class Parse {
         if(scanL.hasNext()){
             String VM_ID = scanL.next();
             int cap = Integer.parseInt(scanL.next());
+            System.out.println(VM_ID+" "+cap);
             pmr.addVM(VM_ID, cap);
             
-            System.out.println(VM_ID+" "+cap);
+            
             
         }
     
