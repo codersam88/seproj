@@ -20,6 +20,7 @@ public class PMmodifier {
 
     public PMmodifier() {
         initPMs(pmCount);
+        System.out.println("initing");
         
     }
     
@@ -28,9 +29,11 @@ public class PMmodifier {
         PMlist = new LinkedList();
         for(int i = 0;i<totalPMs;i++){
             PMlist.add(new PMstruct());
-            ((PMstruct)PMlist.get(i)).PM_NO="PM_"+i+1;
+            ((PMstruct)PMlist.get(i)).PM_NO="PM_"+(i+1);
+            ((PMstruct)PMlist.get(i)).resCap=100;
+            //((PMstruct)PMlist.get(i)).onState=true;
         }
-        System.out.println("the size of list is "+PMlist.size());
+        //System.out.println("the size of list is "+PMlist.size());
     }
     
     public static void main(String[] args){
@@ -53,9 +56,11 @@ public class PMmodifier {
         for(;i<PMlist.size();i++){
             if(((PMstruct)PMlist.get(i)).resCap >= capy){
                 //if(!((PMstruct)PMlist.get(i)).onState){
-                    System.err.println("changing state");
+                    //System.err.println("changing state of pm "+((PMstruct)PMlist.get(i)).PM_NO);
                     ((PMstruct)PMlist.get(i)).onState=true;
-                    System.err.println(((PMstruct)PMlist.get(i)).onState);
+                    System.out.println("state now "+((PMstruct)PMlist.get(i)).onState);
+                    System.out.println("state now next state "+((PMstruct)PMlist.get(i+1)).onState);
+                    //System.err.println(((PMstruct)PMlist.get(i)).onState);
                 //}
                 VMstruct temp = new VMstruct();
                 temp.VM_ID = VM_ID;
@@ -63,10 +68,10 @@ public class PMmodifier {
                 ((PMstruct)PMlist.get(i)).VMlist.add(temp);
                 ((PMstruct)PMlist.get(i)).resCap=
                         ((PMstruct)PMlist.get(i)).resCap-capy;
-                System.out.println("VM has been added in pm no "+ 
-                        ((PMstruct)PMlist.get(i)).PM_NO);
-                System.out.println("the residual cap of pm is "+ 
-                        ((PMstruct)PMlist.get(i)).resCap);
+                //System.out.println("VM has been added in pm no "+ 
+                  //      ((PMstruct)PMlist.get(i)).PM_NO);
+                //System.out.println("the residual cap of pm is "+ 
+                  //      ((PMstruct)PMlist.get(i)).resCap);
                 break;
             }
         }
@@ -107,7 +112,17 @@ public class PMmodifier {
     
     boolean getOnStatus(int i){
         System.out.println("in geton "+((PMstruct)PMlist.get(i)).onState);
+        System.out.println("i value here "+ i);
         return ((PMstruct)PMlist.get(i)).onState;
+        
+    }
+    
+    int getResCap(int i){
+        return ((PMstruct)PMlist.get(i)).resCap;
+    }
+    
+    String getPMNo(int i){
+        return ((PMstruct)PMlist.get(i)).PM_NO;
     }
 }
 

@@ -16,7 +16,7 @@ public class PMstruct {
     String PM_NO;
     private PMstruct PMlist;
     LinkedList VMlist;
-    int resCap=100;
+    int resCap;
     boolean onState=false;
 
     public PMstruct() {

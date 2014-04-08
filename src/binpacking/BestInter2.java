@@ -54,6 +54,8 @@ public class BestInter2 {
                 PMArr[i].disable();
                 //System.out.println("the "+i+" th pm is "+pmr.getOnStatus(i));
             }
+            System.out.println("residual cap "+pmr.getResCap(i));
+            System.out.println("residual cap "+pmr.getPMNo((i)));
             mainWind.add(PMArr[i]);
             
         }
@@ -69,7 +71,9 @@ public class BestInter2 {
         int PMCount = pmr.getPMCount();
         String[] PM_IDs= new String[PMCount];
         for(int i=0; i< PMCount; i++){
+            //System.out.println("i value "+i);
             PM_IDs[i] = pmr.getPMID(i);
+            
         }
         
         createPMs(PMCount);
