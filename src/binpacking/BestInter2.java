@@ -43,23 +43,7 @@ public class BestInter2 {
         mainWind.setVisible(true);
     }
     
-    void createPMs(int noOfPMs){
-        //int noOfPMs=pmr.getPMCount();
-        
-        Button[] PMArr = new Button[noOfPMs];
-        for(int i=0; i < PMArr.length; i++){
-            PMArr[i] = new Button("PM_NO"+i);
-            PMArr[i].setPreferredSize(butDim);
-            if(!pmr.getOnStatus(i)){
-                PMArr[i].disable();
-                //System.out.println("the "+i+" th pm is "+pmr.getOnStatus(i));
-            }
-            System.out.println("residual cap "+pmr.getResCap(i));
-            System.out.println("residual cap "+pmr.getPMNo((i)));
-            mainWind.add(PMArr[i]);
-            
-        }
-    }
+    
     
     
     void setFrameSize(int noOfPMs){
@@ -68,18 +52,36 @@ public class BestInter2 {
     }
     
     void buildGUI(){
-        int PMCount = pmr.getPMCount();
+        int PMCount = pmr.getPMCountA();
         String[] PM_IDs= new String[PMCount];
         for(int i=0; i< PMCount; i++){
             //System.out.println("i value "+i);
-            PM_IDs[i] = pmr.getPMID(i);
+            PM_IDs[i] = pmr.getPMIDA(i);
             
         }
         
-        createPMs(PMCount);
+        createPMs(PMCount,PM_IDs);
         
         setFrameSize(PMCount);
         System.out.println("PM count id " +PMCount);
+    }
+    
+    void createPMs(int noOfPMs,String[] PMNms){
+        //int noOfPMs=pmr.getPMCount();
+        
+        Button[] PMArr = new Button[noOfPMs];
+        for(int i=0; i < PMArr.length; i++){
+            PMArr[i] = new Button(PMNms[i]);
+            PMArr[i].setPreferredSize(butDim);
+            if(!pmr.getOnStatusA(i)){
+                PMArr[i].disable();
+                //System.out.println("the "+i+" th pm is "+pmr.getOnStatus(i));
+            }
+            //System.out.println("residual cap "+pmr.getResCap(i));
+            //System.out.println("residual cap "+pmr.getPMNo((i)));
+            mainWind.add(PMArr[i]);
+            
+        }
     }
     
     
