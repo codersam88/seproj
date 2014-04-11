@@ -14,12 +14,12 @@ public class PMmodifier {
     private final int pmCount=6;
     private int PM_ID;
     private LinkedList PMlist;
-    private PMstruct[] PMArray;
+    private static PMstruct[] PMArray;
     private LinkedList VMlist;
     int VM_num=0;
 
     public PMmodifier() {
-        initPMsA(pmCount);
+        
         System.out.println("initing");
         
     }
@@ -35,12 +35,14 @@ public class PMmodifier {
         }
         //System.out.println("the size of list is "+PMlist.size());
     }
-    void initPMsA(int totalPMs){
-        PMArray=new PMstruct[totalPMs];
-        for(int i = 0;i<totalPMs;i++){
+    void initPMsA(){
+        PMArray=new PMstruct[pmCount];
+        for(int i = 0;i<pmCount;i++){
             PMArray[i]= new PMstruct();
+            System.out.println("in initing "+PMArray[i]);
             PMArray[i].PM_NO="PM_"+(i+1);
             PMArray[i].resCap=100;
+            //System.out.println(PMArray[i]);
             //((PMstruct)PMlist.get(i)).onState=true;
         }
         //System.out.println("the size of list is "+PMlist.size());
@@ -92,6 +94,7 @@ public class PMmodifier {
     }
     
     protected void addVMA(String VM_ID, int capy){
+        
         int i=0;
         /*for(;i<PMlist.size();i++){
             for(int j=0;j<((PMstruct)PMlist.get(i)).VMlist.size();j++){
@@ -99,6 +102,7 @@ public class PMmodifier {
             }
         }*/
         for(;i<PMArray.length;i++){
+            System.out.println("in addvma "+PMArray[i]);
             if(PMArray[i].resCap >= capy){
                 //if(!((PMstruct)PMlist.get(i)).onState){
                     //System.err.println("changing state of pm "+((PMstruct)PMlist.get(i)).PM_NO);
@@ -156,7 +160,7 @@ public class PMmodifier {
     }
     
     boolean getOnStatusA(int i){
-        System.out.println("in geton "+PMArray[i].onState);
+        System.out.println("in on status "+PMArray[i]);
         return PMArray[i].onState;
         
     }

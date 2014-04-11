@@ -22,6 +22,7 @@ public class Parse {
 
     public Parse(File fil) throws IOException {
         pmr = new PMmodifier();
+        pmr.initPMsA();
         pth = fil.toPath();
         parseFile();
         
@@ -34,6 +35,7 @@ public class Parse {
         
     }
     void parseFile() throws IOException{
+        
         Scanner scan = new Scanner(pth);
         //scan.useDelimiter("|");
         for(;scan.hasNextLine();){
