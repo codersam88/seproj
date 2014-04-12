@@ -93,9 +93,11 @@ public class PMmodifier {
         }
         
     }
-    
+    void changeState(int i){
+        PMArray[i].onState=true;
+    }
     protected void addVMA(String VM_ID, int capy){
-        
+        if(checkName(VM_ID)){
         int i=0;
         /*for(;i<PMlist.size();i++){
             for(int j=0;j<((PMstruct)PMlist.get(i)).VMlist.size();j++){
@@ -129,9 +131,20 @@ public class PMmodifier {
         if(i==PMArray.length){
             System.out.println("sorry no enough space");
         }
+        }
         
     }
-    
+    boolean checkName(String VMID){
+        for(int i=0;i<PMArray.length;i++){
+            if(PMArray[i].onState){
+                for(int j=0;j<PMArray[i].VMCount;j++){
+                if(((VMstruct)PMArray[i].VMlist.get(j)).VM_ID.equals(VMID))
+                return false;
+                }
+            }
+        }
+        return true;
+    }
     String genVMID(){
         String VM_ID="VM_";
         if(VM_num<9){

@@ -12,6 +12,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -26,7 +28,7 @@ import javax.swing.border.Border;
  *
  * @author sam
  */
-public class BestInter2 {
+public class BestInter2 implements MouseListener{
     
     public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException{
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -108,6 +110,7 @@ public class BestInter2 {
         
         for(int i=0; i < PMArr.length; i++){
             PMArr[i] = new JPanel();
+            PMArr[i].addMouseListener(this);
             PMArr[i].setLayout(new BoxLayout(PMArr[i], BoxLayout.Y_AXIS));
              
             PMArr[i].setPreferredSize(butDim);
@@ -192,5 +195,37 @@ public class BestInter2 {
         }
         
         
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent me) {
+        for(int i=0;i<pmr.getPMCountA();i++){
+            if(me.getSource()==PMArr[i]){
+                pmr.changeState(i);
+                remove();
+                buildGUI();
+                continue;
+            }
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent me) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent me) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent me) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseExited(MouseEvent me) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
