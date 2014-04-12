@@ -7,12 +7,17 @@
 package binpacking;
 
 import java.awt.Button;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.border.Border;
 
 /**
  *
@@ -71,9 +76,12 @@ public class BestInter2 {
     void createPMs(int noOfPMs,String[] PMNms){
         //int noOfPMs=pmr.getPMCount();
         
-        Button[] PMArr = new Button[noOfPMs];
+        JPanel[] PMArr = new JPanel[noOfPMs];
+        
         for(int i=0; i < PMArr.length; i++){
-            PMArr[i] = new Button(PMNms[i]);
+            PMArr[i] = new JPanel();
+            PMArr[i].setLayout(new BoxLayout(PMArr[i], BoxLayout.Y_AXIS));
+            PMArr[i].setBorder(BorderFactory.createLineBorder(Color.black)); 
             PMArr[i].setPreferredSize(butDim);
             if(!pmr.getOnStatusA(i)){
                 PMArr[i].disable();
@@ -89,12 +97,23 @@ public class BestInter2 {
                 
                 for(int j=0;j<pmr.getVMCount(i);j++){
                     String VM_ID=pmr.getVMID(i,j);
+                    System.out.println("vm id returned "+VM_ID);
                     int VMCap=pmr.getVMCap(i,j);
-                    new JLabel(VM_ID+" "+VMCap);
+                    JLabel lbl=new JLabel(VM_ID+" "+VMCap);
+                    Dimension dim = new Dimension(butDim.width,2*VMCap);
+                    lbl.setBorder(BorderFactory.createLineBorder(Color.black));
+                    lbl.setMaximumSize(dim);
+                    PMArr[i].add(lbl);
                     
                 }
+                int resCap=pmr.getResCapA(i);
+                JLabel remCap=new JLabel("Rem Cap "+resCap);
+                remCap.setMaximumSize(new Dimension(butDim.width,2*resCap));
+                remCap.setBorder(BorderFactory.createLineBorder(Color.black));
+                PMArr[i].add(remCap);
             }
         }
+        
     }
     
     
