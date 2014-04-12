@@ -87,17 +87,13 @@ public class BestInter2 {
         
         System.out.println("PM count id " +PMCount);
         
-        but= new JButton[6];
+        but= new JButton[3];
         but[0] = new JButton("add VM");
         butPanel.add(but[0]);
         but[1] = new JButton("delete VM");
         butPanel.add(but[1]);
-        but[2] = new JButton("switch on PM");
+        but[2] = new JButton("consolidate");
         butPanel.add(but[2]);
-        but[3] = new JButton("switch off PM");
-        butPanel.add(but[3]);
-        but[4] = new JButton("consolidate");
-        butPanel.add(but[4]);
         addButtonListeners(but);
         mainWind.setVisible(true);
         
@@ -167,6 +163,13 @@ public class BestInter2 {
                     buildGUI();
                 }
                 
+            }
+        });
+        buts[1].addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                new DelDialog(mainWind, "Delete VM");
             }
         });
     }
