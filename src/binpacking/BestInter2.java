@@ -10,8 +10,11 @@ import java.awt.Button;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -31,6 +34,8 @@ public class BestInter2 {
     }
     PMmodifier pmr;
     JFrame mainWind;
+    JPanel PMPanel;        
+    JPanel butPanel;
     
     Dimension butDim = new Dimension(150,200);
 
@@ -38,9 +43,13 @@ public class BestInter2 {
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         
         mainWind = new JFrame("Bin packing and VM consolidation");
+        PMPanel = new JPanel();
+        butPanel = new JPanel(new FlowLayout());
+        
+        
         mainWind.setSize(600,600);
         mainWind.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainWind.getContentPane().setLayout(new FlowLayout());
+        mainWind.getContentPane().setLayout(new BoxLayout(mainWind.getContentPane(), BoxLayout.Y_AXIS));
         pmr= new PMmodifier();
         buildGUI();
         
@@ -52,9 +61,12 @@ public class BestInter2 {
     
     
     
-    void setFrameSize(int noOfPMs){
+    void setSizes(int noOfPMs){
+        
         int framWidth = (noOfPMs*(butDim.height))+10;
-        mainWind.setSize(framWidth,400 );
+        PMPanel.setSize(framWidth,300 );
+        butPanel.setSize(framWidth,100);
+        mainWind.setSize(framWidth, 400);
     }
     
     void buildGUI(){
@@ -68,9 +80,25 @@ public class BestInter2 {
         
         createPMs(PMCount,PM_IDs);
         
+        setSizes(PMCount);
         
-        setFrameSize(PMCount);
         System.out.println("PM count id " +PMCount);
+        
+        JButton[] but= new JButton[6];
+        but[0] = new JButton("add VM");
+        butPanel.add(but[0]);
+        but[1] = new JButton("delete VM");
+        butPanel.add(but[1]);
+        but[2] = new JButton("switch on PM");
+        butPanel.add(but[2]);
+        but[3] = new JButton("switch off PM");
+        butPanel.add(but[3]);
+        but[4] = new JButton("consolidate");
+        butPanel.add(but[4]);
+        addButtonListeners(but);
+        
+        
+        
     }
     
     void createPMs(int noOfPMs,String[] PMNms){
@@ -89,7 +117,9 @@ public class BestInter2 {
             }
             //System.out.println("residual cap "+pmr.getResCap(i));
             //System.out.println("residual cap "+pmr.getPMNo((i)));
-            mainWind.add(PMArr[i]);
+            PMPanel.add(PMArr[i]);
+            mainWind.add(PMPanel);
+            mainWind.add(butPanel);
             
         }
         for(int i=0;i<pmr.getPMCountA();i++){
@@ -116,6 +146,15 @@ public class BestInter2 {
         
     }
     
+    void addButtonListeners(JButton[] buts){
+        buts[0].addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                
+            }
+        });
+    }
     
     
 }
