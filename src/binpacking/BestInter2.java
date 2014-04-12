@@ -184,6 +184,16 @@ public class BestInter2 implements MouseListener{
                 }
             }
         });
+        
+        buts[2].addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                if(pmr.consolidate()){
+                    
+                }
+            }
+        });
     }
     
     void remove(){

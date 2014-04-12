@@ -220,5 +220,30 @@ public class PMmodifier {
     int getVMCap(int i,int j){
         return ((VMstruct)PMArray[i].VMlist.get(j)).cap;
     }
+    
+    boolean consolidate(){
+        PMstruct[] tmp=PMArray;
+        sort(tmp);
+        return true;
+    }
+    
+    PMstruct[] sort(PMstruct[] temp){
+        for(int out=1;out<temp.length;out++){
+            
+            int key=temp[out].resCap;
+            int i=out-1;
+            while(i>=0 && temp[i].resCap>key){
+                temp[i+1].resCap=temp[i].resCap;
+                i--;
+                temp[i+1].resCap=key;
+            }        
+        }
+        for(int i=0;i<temp.length;i++){
+            System.out.println(temp[i].resCap+" ");
+        }
+        System.out.println("after sorting");
+        
+        return temp;
+    }
 }
 
