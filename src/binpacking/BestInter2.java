@@ -36,6 +36,9 @@ public class BestInter2 {
     JFrame mainWind;
     JPanel PMPanel;        
     JPanel butPanel;
+    JPanel[] PMArr;
+    int PMCount;
+    JButton[] but;
     
     Dimension butDim = new Dimension(150,200);
 
@@ -55,7 +58,7 @@ public class BestInter2 {
         
         
         //mainWind.pack();
-        mainWind.setVisible(true);
+        
     }
     
     
@@ -70,7 +73,7 @@ public class BestInter2 {
     }
     
     void buildGUI(){
-        int PMCount = pmr.getPMCountA();
+        PMCount = pmr.getPMCountA();
         String[] PM_IDs= new String[PMCount];
         for(int i=0; i< PMCount; i++){
             //System.out.println("i value "+i);
@@ -84,7 +87,7 @@ public class BestInter2 {
         
         System.out.println("PM count id " +PMCount);
         
-        JButton[] but= new JButton[6];
+        but= new JButton[6];
         but[0] = new JButton("add VM");
         butPanel.add(but[0]);
         but[1] = new JButton("delete VM");
@@ -96,6 +99,7 @@ public class BestInter2 {
         but[4] = new JButton("consolidate");
         butPanel.add(but[4]);
         addButtonListeners(but);
+        mainWind.setVisible(true);
         
         
         
@@ -104,7 +108,7 @@ public class BestInter2 {
     void createPMs(int noOfPMs,String[] PMNms){
         //int noOfPMs=pmr.getPMCount();
         
-        JPanel[] PMArr = new JPanel[noOfPMs];
+        PMArr = new JPanel[noOfPMs];
         
         for(int i=0; i < PMArr.length; i++){
             PMArr[i] = new JPanel();
@@ -151,10 +155,30 @@ public class BestInter2 {
 
             @Override
             public void actionPerformed(ActionEvent ae) {
-                new MyDialogs(mainWind, "Enter VM ID and capacity");
+                MyDialogs m=new MyDialogs(mainWind, "Enter VM ID and capacity");
+                if(m.areAccepted()){
+                    String[] vs ;
+                    vs = m.getValues();
+                    pmr.addVMA(vs[0], Integer.parseInt(vs[1]));
+                    remove();
+                    //mainWind.removeAll();
+                    //mainWind.revalidate();
+                    //mainWind.repaint();
+                    buildGUI();
+                }
+                
             }
         });
     }
     
-    
+    void remove(){
+        for(int i=0;i<PMCount;i++){
+            PMPanel.remove(PMArr[i]);
+        }
+        for(int j=0;j<5;j++){
+            butPanel.remove(but[j]);
+        }
+        
+        
+    }
 }

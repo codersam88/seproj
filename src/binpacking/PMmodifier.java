@@ -40,7 +40,7 @@ public class PMmodifier {
         PMArray=new PMstruct[pmCount];
         for(int i = 0;i<pmCount;i++){
             PMArray[i]= new PMstruct();
-            System.out.println("in initing "+PMArray[i]);
+            //System.out.println("in initing "+PMArray[i]);
             PMArray[i].PM_NO="PM_"+(i+1);
             PMArray[i].resCap=100;
             //System.out.println(PMArray[i]);
@@ -103,7 +103,7 @@ public class PMmodifier {
             }
         }*/
         for(;i<PMArray.length;i++){
-            System.out.println("in addvma "+PMArray[i]);
+            //System.out.println("in addvma "+PMArray[i]);
             if(PMArray[i].resCap >= capy){
                 //if(!((PMstruct)PMlist.get(i)).onState){
                     //System.err.println("changing state of pm "+((PMstruct)PMlist.get(i)).PM_NO);

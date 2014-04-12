@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -26,13 +27,16 @@ public class MyDialogs extends JDialog{
    private String value2 = null;
    private JTextField input1;
    private JTextField input2;
+   private boolean valueAccepted=false;
    public static void main(String[] args){
        MyDialogs m= new MyDialogs(null, "hello");
        
    }
  
    public MyDialogs(Frame owner, String title) {
+       
       super(owner, title, true);
+      setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
       JPanel btnPanel = new JPanel();
       JButton okBtn   = new JButton("Accept");
@@ -70,11 +74,15 @@ public class MyDialogs extends JDialog{
    private void okButton() {
       value1 = input1.getText();
       value2 = input2.getText();
-      setVisible(false);
+      valueAccepted=true;
+      dispose();
    }
 
    private void noButton() {
       value1 = null;
-      setVisible(false);
+      dispose();
+   }
+   boolean areAccepted(){
+       return valueAccepted;
    }
 }
