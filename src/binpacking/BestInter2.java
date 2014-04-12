@@ -109,12 +109,14 @@ public class BestInter2 {
         for(int i=0; i < PMArr.length; i++){
             PMArr[i] = new JPanel();
             PMArr[i].setLayout(new BoxLayout(PMArr[i], BoxLayout.Y_AXIS));
-            PMArr[i].setBorder(BorderFactory.createLineBorder(Color.black)); 
+             
             PMArr[i].setPreferredSize(butDim);
+            PMArr[i].setBorder(BorderFactory.createLineBorder(Color.green,4));
             if(!pmr.getOnStatusA(i)){
-                PMArr[i].disable();
+                PMArr[i].setBorder(BorderFactory.createLineBorder(Color.red,4));
                 //System.out.println("the "+i+" th pm is "+pmr.getOnStatus(i));
             }
+            
             //System.out.println("residual cap "+pmr.getResCap(i));
             //System.out.println("residual cap "+pmr.getPMNo((i)));
             PMPanel.add(PMArr[i]);
@@ -131,7 +133,7 @@ public class BestInter2 {
                     int VMCap=pmr.getVMCap(i,j);
                     JLabel lbl=new JLabel(VM_ID+" "+VMCap);
                     Dimension dim = new Dimension(butDim.width,2*VMCap);
-                    lbl.setBorder(BorderFactory.createLineBorder(Color.black));
+                    lbl.setBorder(BorderFactory.createLineBorder(Color.green,3));
                     lbl.setMaximumSize(dim);
                     PMArr[i].add(lbl);
                     
@@ -139,7 +141,7 @@ public class BestInter2 {
                 int resCap=pmr.getResCapA(i);
                 JLabel remCap=new JLabel("Rem Cap "+resCap);
                 remCap.setMaximumSize(new Dimension(butDim.width,2*resCap));
-                remCap.setBorder(BorderFactory.createLineBorder(Color.black));
+                remCap.setBorder(BorderFactory.createLineBorder(Color.green,3));
                 PMArr[i].add(remCap);
             }
         }

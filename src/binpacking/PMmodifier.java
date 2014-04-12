@@ -126,9 +126,9 @@ public class PMmodifier {
                 break;
             }
         }
-//        if(i==PMlist.size()){
-//            System.out.println("sorry no enough space");
-//        }
+        if(i==PMArray.length){
+            System.out.println("sorry no enough space");
+        }
         
     }
     
@@ -147,7 +147,11 @@ public class PMmodifier {
         int freed = ((VMstruct)PMArray[PMNo].VMlist.get(VMNo)).cap;
         PMArray[PMNo].VMlist.remove(VMNo);
         PMArray[PMNo].VMCount--;
+        
         PMArray[PMNo].resCap = PMArray[PMNo].resCap + freed;
+        if(PMArray[PMNo].VMCount==0){
+            PMArray[PMNo].onState=false;
+        }
     }
     
     int getPMCountA(){
