@@ -23,8 +23,8 @@ import javax.swing.JTextField;
  * @author sam
  */
 public class DelDialog extends JDialog{
-   private String value1 = null;
-   private String value2 = null;
+   private int value1 = 0;
+   private int value2 = 0;
    PMmodifier pmr = new PMmodifier();
    private JComboBox input1;
    private JComboBox input2;
@@ -59,7 +59,11 @@ public class DelDialog extends JDialog{
 
           @Override
           public void actionPerformed(ActionEvent ae) {
-              
+              int PMNo = input1.getSelectedIndex();
+              input2.removeAllItems();
+              for(int i=0;i<pmr.getVMCount(PMNo);i++){
+                  input2.addItem(pmr.getVMID(PMNo, i));
+              }
           }
       });
       getContentPane().add(new JLabel("select PM"));
@@ -73,29 +77,30 @@ public class DelDialog extends JDialog{
    
    void fillBoxes(){
        input1 = new JComboBox();
+       
        for(int i=0;i<pmr.getPMCountA();i++){
            input1.addItem(pmr.getPMIDA(i));
        }
        input2 = new JComboBox();
-       input2.addItem("hello");
+       
    }
  
-   public String[] getValues() {
-       String[] values=new String[2];
+   public int[] getValues() {
+       int[] values=new int[2];
        values[0]=value1;
        values[1]=value2;
        return values;
    }
 
    private void okButton() {
-      //value1 = input1.getSelectedIndex();
-      //value2 = input2.getText();
+      value1 = input1.getSelectedIndex();
+      value2 = input2.getSelectedIndex();
       valueAccepted=true;
       dispose();
    }
 
    private void noButton() {
-      value1 = null;
+      //value1 = null;
       dispose();
    }
    boolean areAccepted(){

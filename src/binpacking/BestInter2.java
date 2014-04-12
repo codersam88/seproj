@@ -169,7 +169,14 @@ public class BestInter2 {
 
             @Override
             public void actionPerformed(ActionEvent ae) {
-                new DelDialog(mainWind, "Delete VM");
+                DelDialog d =new DelDialog(mainWind, "Delete VM");
+                if(d.areAccepted()){
+                    int[] vs;
+                    vs= d.getValues();
+                    pmr.deleteVM(vs[0],vs[1]);
+                    remove();
+                    buildGUI();
+                }
             }
         });
     }
@@ -178,7 +185,7 @@ public class BestInter2 {
         for(int i=0;i<PMCount;i++){
             PMPanel.remove(PMArr[i]);
         }
-        for(int j=0;j<5;j++){
+        for(int j=0;j<3;j++){
             butPanel.remove(but[j]);
         }
         

@@ -143,15 +143,11 @@ public class PMmodifier {
         return VM_ID;
     }
     
-    void deleteVM(String VM_ID){
-        
-        for(int i=0;i<PMlist.size();i++){
-            for(int j=0;j<((PMstruct)PMlist.get(i)).VMlist.size();j++){ 
-//                if((VMstruct((PMstruct)PMlist.get(i)).VMlist.))
-            
-            } 
-            break;
-        }
+    void deleteVM(int PMNo,int VMNo){
+        int freed = ((VMstruct)PMArray[PMNo].VMlist.get(VMNo)).cap;
+        PMArray[PMNo].VMlist.remove(VMNo);
+        PMArray[PMNo].VMCount--;
+        PMArray[PMNo].resCap = PMArray[PMNo].resCap + freed;
     }
     
     int getPMCountA(){
