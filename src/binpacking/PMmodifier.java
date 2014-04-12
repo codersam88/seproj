@@ -16,6 +16,7 @@ public class PMmodifier {
     private LinkedList PMlist;
     private static PMstruct[] PMArray;
     private LinkedList VMlist;
+    private VMstruct[] VMArray;
     int VM_num=0;
 
     public PMmodifier() {
@@ -117,6 +118,7 @@ public class PMmodifier {
                 PMArray[i].VMlist.add(temp);
                 PMArray[i].resCap=
                         PMArray[i].resCap-capy;
+                PMArray[i].VMCount++;
                 //System.out.println("VM has been added in pm no "+ 
                   //      ((PMstruct)PMlist.get(i)).PM_NO);
                 //System.out.println("the residual cap of pm is "+ 
@@ -160,7 +162,7 @@ public class PMmodifier {
     }
     
     boolean getOnStatusA(int i){
-        System.out.println("in on status "+PMArray[i]);
+        
         return PMArray[i].onState;
         
     }
@@ -172,6 +174,7 @@ public class PMmodifier {
     String getPMNoA(int i){
         return PMArray[i].PM_NO;
     }
+    
     
     /*int getPMCount(){
         return PMlist.size();
@@ -194,5 +197,15 @@ public class PMmodifier {
     String getPMNo(int i){
         return ((PMstruct)PMlist.get(i)).PM_NO;
     }*/
+    int getVMCount(int i){
+        return PMArray[i].VMCount;
+    }
+    
+    String getVMID(int i,int j){
+        return  ((VMstruct)PMArray[i].VMlist.get(j)).VM_ID;
+    }
+    int getVMCap(int i,int j){
+        return ((VMstruct)PMArray[i].VMlist.get(j)).cap;
+    }
 }
 

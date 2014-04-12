@@ -10,6 +10,7 @@ import java.awt.Button;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -62,6 +63,7 @@ public class BestInter2 {
         
         createPMs(PMCount,PM_IDs);
         
+        
         setFrameSize(PMCount);
         System.out.println("PM count id " +PMCount);
     }
@@ -81,6 +83,17 @@ public class BestInter2 {
             //System.out.println("residual cap "+pmr.getPMNo((i)));
             mainWind.add(PMArr[i]);
             
+        }
+        for(int i=0;i<pmr.getPMCountA();i++){
+            if(pmr.getOnStatusA(i)==true){
+                
+                for(int j=0;j<pmr.getVMCount(i);j++){
+                    String VM_ID=pmr.getVMID(i,j);
+                    int VMCap=pmr.getVMCap(i,j);
+                    new JLabel(VM_ID+" "+VMCap);
+                    
+                }
+            }
         }
     }
     

@@ -18,9 +18,12 @@ public class PMstruct {
     LinkedList VMlist;
     int resCap;
     boolean onState=false;
+    int VMCount=0;
+    VMstruct[] VMArray;
 
     public PMstruct() {
         VMlist = new LinkedList();
+        VMArray= new VMstruct[5];
     }
     
     
