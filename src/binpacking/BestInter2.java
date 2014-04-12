@@ -151,7 +151,7 @@ public class BestInter2 {
 
             @Override
             public void actionPerformed(ActionEvent ae) {
-                
+                new MyDialogs(mainWind, "Enter VM ID and capacity");
             }
         });
     }
