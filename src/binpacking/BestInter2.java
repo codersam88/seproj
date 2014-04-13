@@ -36,19 +36,23 @@ public class BestInter2 implements MouseListener{
     }
     PMmodifier pmr;
     JFrame mainWind;
-    JPanel PMPanel;        
+    JPanel PMPanel;  
+    JPanel PMidPanel;
     JPanel butPanel;
     JPanel[] PMArr;
+    JLabel[] PMidLabels;
     int PMCount;
     JButton[] but;
     
     Dimension butDim = new Dimension(150,200);
+    Dimension idDim = new Dimension(150,20);
 
     public BestInter2() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         
         mainWind = new JFrame("Bin packing and VM consolidation");
         PMPanel = new JPanel();
+        PMidPanel = new JPanel(new FlowLayout());
         butPanel = new JPanel(new FlowLayout());
         
         
@@ -70,8 +74,9 @@ public class BestInter2 implements MouseListener{
         
         int framWidth = (noOfPMs*(butDim.height))+10;
         PMPanel.setSize(framWidth,300 );
+        PMidPanel.setSize(framWidth,20);
         butPanel.setSize(framWidth,100);
-        mainWind.setSize(framWidth, 400);
+        mainWind.setSize(framWidth, 420);
     }
     
     void buildGUI(){
@@ -107,11 +112,14 @@ public class BestInter2 implements MouseListener{
         //int noOfPMs=pmr.getPMCount();
         
         PMArr = new JPanel[noOfPMs];
+        PMidLabels = new JLabel[noOfPMs];
         
         for(int i=0; i < PMArr.length; i++){
             PMArr[i] = new JPanel();
             PMArr[i].addMouseListener(this);
             PMArr[i].setLayout(new BoxLayout(PMArr[i], BoxLayout.Y_AXIS));
+            
+            PMidLabels[i] = new JLabel(pmr.getPMNoA(i));
              
             PMArr[i].setPreferredSize(butDim);
             PMArr[i].setBorder(BorderFactory.createLineBorder(Color.green,4));
@@ -119,11 +127,14 @@ public class BestInter2 implements MouseListener{
                 PMArr[i].setBorder(BorderFactory.createLineBorder(Color.red,4));
                 //System.out.println("the "+i+" th pm is "+pmr.getOnStatus(i));
             }
+            PMidLabels[i].setPreferredSize(idDim);
             
             //System.out.println("residual cap "+pmr.getResCap(i));
             //System.out.println("residual cap "+pmr.getPMNo((i)));
             PMPanel.add(PMArr[i]);
+            PMidPanel.add(PMidLabels[i]);
             mainWind.add(PMPanel);
+            mainWind.add(PMidPanel);
             mainWind.add(butPanel);
             
         }

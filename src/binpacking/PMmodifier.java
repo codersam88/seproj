@@ -224,7 +224,13 @@ public class PMmodifier {
     boolean consolidate(){
         PMstruct[] tmp=PMArray;
         sort(PMArray);
-        return true;
+        if(tryMoving()){
+            return true;
+        }
+        return false;
+    }
+    boolean tryMoving(){
+        return false;
     }
     
     PMstruct[] sort(PMstruct[] temp){
