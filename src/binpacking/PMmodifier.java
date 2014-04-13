@@ -134,10 +134,7 @@ public class PMmodifier {
         }
         
     }
-    protected void addVMA(int PMNO,String VM_ID, int capy){
-        
-        
-        
+    protected void addVMA(int PMNO,String VM_ID, int capy){       
                 VMstruct temp = new VMstruct();
                 temp.VM_ID = VM_ID;
                 temp.cap = capy;
@@ -145,12 +142,6 @@ public class PMmodifier {
                 PMArray[PMNO].resCap=
                         PMArray[PMNO].resCap-capy;
                 PMArray[PMNO].VMCount++;
-                
-            
-        
-        
-        
-        
     }
     boolean checkName(String VMID){
         for(int i=0;i<PMArray.length;i++){
@@ -253,7 +244,12 @@ public class PMmodifier {
             for(int j=0;j<PMArray[i].VMCount;j++){
                 for(int k=PMArray.length-1;k>=0&&k!=i;k--){
                     if(((VMstruct)PMArray[i].VMlist.get(j)).cap<PMArray[k].resCap){
-                        //addVMA(null, k);
+                        addVMA(k,((VMstruct)PMArray[i].VMlist.get(j)).VM_ID,
+                                ((VMstruct)PMArray[i].VMlist.get(j)).cap);
+                        deleteVM(i, j);
+                        if(PMArray[i].VMCount==0){
+                            return true;
+                        }
                         
                     }
                 }
