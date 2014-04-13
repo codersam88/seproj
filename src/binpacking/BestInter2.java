@@ -230,6 +230,7 @@ public class BestInter2 implements MouseListener{
                 pmr.changeState(i);
                 }
                 else{
+                    
                     pmr.switchOFFPM(i);
                 }
                 remove();

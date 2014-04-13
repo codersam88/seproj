@@ -64,6 +64,7 @@ public class DelDialog extends JDialog{
               for(int i=0;i<pmr.getVMCount(PMNo);i++){
                   input2.addItem(pmr.getVMID(PMNo, i));
               }
+              
           }
       });
       getContentPane().add(new JLabel("select PM"));
@@ -79,9 +80,12 @@ public class DelDialog extends JDialog{
        input1 = new JComboBox();
        
        for(int i=0;i<pmr.getPMCountA();i++){
-           if(pmr.getOnStatusA(i)){
+           
+           
            input1.addItem(pmr.getPMIDA(i));
-           }
+           
+           
+           
        }
        input2 = new JComboBox();
        

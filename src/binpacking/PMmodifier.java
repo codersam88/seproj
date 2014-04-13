@@ -268,8 +268,12 @@ public class PMmodifier {
             for(int j=0;j<pmCount;j++){
                 PMstruct tmp=PMArray[i];
                 if(PMArray[i].PM_NO.equals("PM "+(j+1))){
+                    
                     PMArray[i]=PMArray[j];
+                    System.out.println("in "+PMArray[i].PM_NO+" goest "+PMArray[j].PM_NO);
                     PMArray[j]=tmp;
+                    if(i==5&&j==5)
+                    System.out.println("in "+PMArray[i].PM_NO+" goest "+PMArray[j].PM_NO);
                 }
             }
         }
@@ -315,17 +319,30 @@ public class PMmodifier {
         return temp;
     }
     void switchOFFPM(int i){
+        
         PMstruct[] tmp=copy();
+        //for(int j=0;j<tmp[i].VMCount;j++){
+        //    System.out.println(((VMstruct)tmp[i].VMlist.get(j)).VM_ID);
+        //}
         for(int j=0;j<tmp[i].VMCount;j++){
+        System.out.println(((VMstruct)tmp[i].VMlist.get(j)).cap);
+        }
+        System.out.println(tmp[i].VMCount);
+        for(int j=0;j<tmp[i].VMCount;j++){
+            System.out.println(j);
             for(int k=0;k<pmCount;k++){
-                if(!tmp[i].PM_NO.equals("PM "+(i+1))){
-                    if(((VMstruct)tmp[i].VMlist.get(j)).cap
-                            >=tmp[k].resCap){
+                
+                if(!(tmp[k].PM_NO.equals("PM "+(i+1)))){
+                    System.out.println(tmp[i].PM_NO);
+                    
+                    
                         if(tmp[k].onState){
+                            if(((VMstruct)tmp[i].VMlist.get(j)).cap
+                            <=tmp[k].resCap){
                             addVMA(tmp, k, ((VMstruct)tmp[i].VMlist.get(j)).VM_ID, 
                                     ((VMstruct)tmp[i].VMlist.get(j)).cap);
                             deleteVM(tmp, i, j);
-                            if(tmp[i].onState){
+                            if(!tmp[i].onState){
                                 updatePA(tmp);
                             }
                         }
