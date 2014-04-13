@@ -239,14 +239,29 @@ public class PMmodifier {
     boolean consolidate(){
         PMstruct[] tmp=copy();
         sort(tmp);
-        if(tryMoving(tmp)){
+        int i=0;
+        for(;tryMoving(tmp);i++){
+            sort(tmp);
+            
+        }
+        updatePA(tmp);
+        order();
+        if(i>0){
+            return true;
+        }
+        /*if(tryMoving(tmp)){
             sort(PMArray);
             tryMoving(PMArray);
             order();
             return true;
-        }
+        }*/
         //PMArray=tmp;
         return false;
+    }
+    void updatePA(PMstruct[] tmp){
+        for(int i=0;i<pmCount;i++){
+            PMArray[i]=tmp[i];
+        }
     }
     void order(){
         for(int i=0;i<pmCount;i++){
