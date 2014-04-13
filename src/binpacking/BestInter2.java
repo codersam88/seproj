@@ -201,7 +201,8 @@ public class BestInter2 implements MouseListener{
             @Override
             public void actionPerformed(ActionEvent ae) {
                 if(pmr.consolidate()){
-                    
+                    remove();
+                    buildGUI();
                 }
             }
         });
@@ -210,6 +211,7 @@ public class BestInter2 implements MouseListener{
     void remove(){
         for(int i=0;i<PMCount;i++){
             PMPanel.remove(PMArr[i]);
+            PMidPanel.remove(PMidLabels[i]);
         }
         for(int j=0;j<3;j++){
             butPanel.remove(but[j]);
