@@ -6,6 +6,7 @@
 
 package binpacking;
 
+import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -40,7 +41,7 @@ public class BestInter2 implements MouseListener{
     JPanel PMPanel;  
     JPanel PMidPanel;
     JPanel butPanel;
-    JScrollPane scrPane;
+    //JScrollPane scrPane;
     JPanel[] PMArr;
     JLabel[] PMidLabels;
     int PMCount;
@@ -56,7 +57,7 @@ public class BestInter2 implements MouseListener{
         PMPanel = new JPanel();
         PMidPanel = new JPanel(new FlowLayout());
         butPanel = new JPanel(new FlowLayout());
-        scrPane= new JScrollPane();
+//        scrPane= new JScrollPane();
         mainWind.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainWind.getContentPane().setLayout(new BoxLayout(mainWind.getContentPane(), BoxLayout.Y_AXIS));
         pmr= new PMmodifier();
@@ -75,8 +76,9 @@ public class BestInter2 implements MouseListener{
         int framWidth = (noOfPMs*(butDim.height))+10;
         PMPanel.setSize(framWidth,300 );
         PMidPanel.setSize(framWidth,20);
+//        scrPane.setSize(framWidth,400);
         butPanel.setSize(framWidth,100);
-        mainWind.setSize(framWidth, 420);
+        mainWind.setSize(framWidth, 520);
     }
     
     void buildGUI(){
@@ -90,12 +92,18 @@ public class BestInter2 implements MouseListener{
         but[2] = new JButton("consolidate");
         butPanel.add(but[2]);
         addButtonListeners(but);
-        mainWind.setResizable(false);
-        mainWind.setVisible(true);
+        
+//        scrPane= new JScrollPane();
+  //      scrPane.setLayout(new BoxLayout(scrPane, BoxLayout.Y_AXIS));
         setSizes(PMCount);
+    //    scrPane.add(PMPanel);
+        
+        //mainWind.add(scrPane);
         mainWind.add(PMPanel);
         mainWind.add(PMidPanel);
         mainWind.add(butPanel);
+        mainWind.setResizable(false);
+        mainWind.setVisible(true);
         
         
     }
