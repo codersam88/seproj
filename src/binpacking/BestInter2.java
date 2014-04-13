@@ -20,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.Border;
@@ -39,6 +40,7 @@ public class BestInter2 implements MouseListener{
     JPanel PMPanel;  
     JPanel PMidPanel;
     JPanel butPanel;
+    JScrollPane scrPane;
     JPanel[] PMArr;
     JLabel[] PMidLabels;
     int PMCount;
@@ -54,9 +56,7 @@ public class BestInter2 implements MouseListener{
         PMPanel = new JPanel();
         PMidPanel = new JPanel(new FlowLayout());
         butPanel = new JPanel(new FlowLayout());
-        
-        
-        mainWind.setSize(600,600);
+        scrPane= new JScrollPane();
         mainWind.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainWind.getContentPane().setLayout(new BoxLayout(mainWind.getContentPane(), BoxLayout.Y_AXIS));
         pmr= new PMmodifier();
@@ -81,19 +81,7 @@ public class BestInter2 implements MouseListener{
     
     void buildGUI(){
         PMCount = pmr.getPMCountA();
-        String[] PM_IDs= new String[PMCount];
-        for(int i=0; i< PMCount; i++){
-            //System.out.println("i value "+i);
-            PM_IDs[i] = pmr.getPMIDA(i);
-            
-        }
-        
-        createPMs(PMCount,PM_IDs);
-        
-        setSizes(PMCount);
-        
-        //System.out.println("PM count id " +PMCount);
-        
+        createPMs(PMCount);        
         but= new JButton[3];
         but[0] = new JButton("add VM");
         butPanel.add(but[0]);
@@ -104,39 +92,35 @@ public class BestInter2 implements MouseListener{
         addButtonListeners(but);
         mainWind.setResizable(false);
         mainWind.setVisible(true);
-        
+        setSizes(PMCount);
+        mainWind.add(PMPanel);
+        mainWind.add(PMidPanel);
+        mainWind.add(butPanel);
         
         
     }
     
-    void createPMs(int noOfPMs,String[] PMNms){
+    void createPMs(int noOfPMs){
         //int noOfPMs=pmr.getPMCount();
         
         PMArr = new JPanel[noOfPMs];
         PMidLabels = new JLabel[noOfPMs];
         
-        for(int i=0; i < PMArr.length; i++){
+        for(int i=0; i < noOfPMs; i++){
             PMArr[i] = new JPanel();
             PMArr[i].addMouseListener(this);
-            PMArr[i].setLayout(new BoxLayout(PMArr[i], BoxLayout.Y_AXIS));
-            
             PMidLabels[i] = new JLabel(pmr.getPMNoA(i));
-             
+            PMArr[i].setLayout(new BoxLayout(PMArr[i], BoxLayout.Y_AXIS));
             PMArr[i].setPreferredSize(butDim);
             PMArr[i].setBorder(BorderFactory.createLineBorder(Color.green,4));
             if(!pmr.getOnStatusA(i)){
                 PMArr[i].setBorder(BorderFactory.createLineBorder(Color.red,4));
-                //System.out.println("the "+i+" th pm is "+pmr.getOnStatus(i));
+                
             }
             PMidLabels[i].setPreferredSize(idDim);
-            
-            //System.out.println("residual cap "+pmr.getResCap(i));
-            //System.out.println("residual cap "+pmr.getPMNo((i)));
             PMPanel.add(PMArr[i]);
             PMidPanel.add(PMidLabels[i]);
-            mainWind.add(PMPanel);
-            mainWind.add(PMidPanel);
-            mainWind.add(butPanel);
+            
             
         }
         for(int i=0;i<pmr.getPMCountA();i++){
