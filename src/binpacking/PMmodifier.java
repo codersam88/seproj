@@ -321,6 +321,11 @@ public class PMmodifier {
     void switchOFFPM(int i){
         
         PMstruct[] tmp=copy();
+        if(tmp[i].resCap==100){
+            tmp[i].onState=false;
+            updatePA(tmp);
+            return;
+        }
         //for(int j=0;j<tmp[i].VMCount;j++){
         //    System.out.println(((VMstruct)tmp[i].VMlist.get(j)).VM_ID);
         //}
