@@ -223,7 +223,7 @@ public class PMmodifier {
     
     boolean consolidate(){
         PMstruct[] tmp=PMArray;
-        sort(tmp);
+        sort(PMArray);
         return true;
     }
     
@@ -231,11 +231,13 @@ public class PMmodifier {
         for(int out=1;out<temp.length;out++){
             
             int key=temp[out].resCap;
+            PMstruct ko=temp[out];
             int i=out-1;
-            while(i>=0 && temp[i].resCap>key){
-                temp[i+1].resCap=temp[i].resCap;
+            while(i>=0 && temp[i].resCap<key){
+                temp[i+1]=temp[i];
                 i--;
-                temp[i+1].resCap=key;
+                
+                temp[i+1]=ko;
             }        
         }
         for(int i=0;i<temp.length;i++){
