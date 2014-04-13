@@ -92,7 +92,7 @@ public class BestInter2 implements MouseListener{
         
         setSizes(PMCount);
         
-        System.out.println("PM count id " +PMCount);
+        //System.out.println("PM count id " +PMCount);
         
         but= new JButton[3];
         but[0] = new JButton("add VM");
@@ -143,7 +143,7 @@ public class BestInter2 implements MouseListener{
                 
                 for(int j=0;j<pmr.getVMCount(i);j++){
                     String VM_ID=pmr.getVMID(i,j);
-                    System.out.println("vm id returned "+VM_ID);
+                    //System.out.println("vm id returned "+VM_ID);
                     int VMCap=pmr.getVMCap(i,j);
                     JLabel lbl=new JLabel(VM_ID+" "+VMCap);
                     Dimension dim = new Dimension(butDim.width,2*VMCap);
@@ -201,6 +201,8 @@ public class BestInter2 implements MouseListener{
             @Override
             public void actionPerformed(ActionEvent ae) {
                 if(pmr.consolidate()){
+                    System.out.println("entered");
+                    
                     remove();
                     buildGUI();
                 }

@@ -21,7 +21,7 @@ public class PMmodifier {
 
     public PMmodifier() {
         
-        System.out.println("initing");
+        //System.out.println("initing");
         
     }
     
@@ -231,23 +231,27 @@ public class PMmodifier {
     }
     
     boolean consolidate(){
-        PMstruct[] tmp=PMArray;
-        sort(PMArray);
-        if(tryMoving()){
+        PMstruct[] tmp=new PMstruct[pmCount];
+        for(int i=0;i<pmCount;i++){
+            tmp[i]=PMArray[i];
+        }
+        sort(tmp);
+        if(tryMoving(tmp)){
             return true;
         }
+        //PMArray=tmp;
         return false;
     }
-    boolean tryMoving(){
-        for(int i=0;i<PMArray.length;i++){
-            if(PMArray[i].onState){
-            for(int j=0;j<PMArray[i].VMCount;j++){
-                for(int k=PMArray.length-1;k>=0&&k!=i;k--){
-                    if(((VMstruct)PMArray[i].VMlist.get(j)).cap<PMArray[k].resCap){
-                        addVMA(k,((VMstruct)PMArray[i].VMlist.get(j)).VM_ID,
-                                ((VMstruct)PMArray[i].VMlist.get(j)).cap);
+    boolean tryMoving(PMstruct[] temp){
+        for(int i=0;i<temp.length;i++){
+            if(temp[i].onState){
+            for(int j=0;j<temp[i].VMCount;j++){
+                for(int k=temp.length-1;k>=0&&k!=i;k--){
+                    if(((VMstruct)temp[i].VMlist.get(j)).cap<temp[k].resCap){
+                        addVMA(k,((VMstruct)temp[i].VMlist.get(j)).VM_ID,
+                                ((VMstruct)temp[i].VMlist.get(j)).cap);
                         deleteVM(i, j);
-                        if(PMArray[i].VMCount==0){
+                        if(temp[i].VMCount==0){
                             return true;
                         }
                         
@@ -273,9 +277,9 @@ public class PMmodifier {
             }        
         }
         for(int i=0;i<temp.length;i++){
-            System.out.println(temp[i].resCap+" ");
+            //System.out.println(temp[i].resCap+" ");
         }
-        System.out.println("after sorting");
+        //System.out.println("after sorting");
         
         return temp;
     }
