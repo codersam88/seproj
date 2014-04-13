@@ -226,7 +226,12 @@ public class BestInter2 implements MouseListener{
     public void mouseClicked(MouseEvent me) {
         for(int i=0;i<pmr.getPMCountA();i++){
             if(me.getSource()==PMArr[i]){
+                if(!pmr.getOnStatusA(i)){
                 pmr.changeState(i);
+                }
+                else{
+                    pmr.switchOFFPM(i);
+                }
                 remove();
                 buildGUI();
                 continue;

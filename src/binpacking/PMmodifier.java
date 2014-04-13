@@ -314,5 +314,26 @@ public class PMmodifier {
          
         return temp;
     }
+    void switchOFFPM(int i){
+        PMstruct[] tmp=copy();
+        for(int j=0;j<tmp[i].VMCount;j++){
+            for(int k=0;k<pmCount;k++){
+                if(!tmp[i].PM_NO.equals("PM "+(i+1))){
+                    if(((VMstruct)tmp[i].VMlist.get(j)).cap
+                            >=tmp[k].resCap){
+                        if(tmp[k].onState){
+                            addVMA(tmp, k, ((VMstruct)tmp[i].VMlist.get(j)).VM_ID, 
+                                    ((VMstruct)tmp[i].VMlist.get(j)).cap);
+                            deleteVM(tmp, i, j);
+                            if(tmp[i].onState){
+                                updatePA(tmp);
+                            }
+                        }
+                        
+                    }
+                }
+            }
+        }
+    }
 }
 
