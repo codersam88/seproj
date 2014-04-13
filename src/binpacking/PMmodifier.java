@@ -134,6 +134,24 @@ public class PMmodifier {
         }
         
     }
+    protected void addVMA(int PMNO,String VM_ID, int capy){
+        
+        
+        
+                VMstruct temp = new VMstruct();
+                temp.VM_ID = VM_ID;
+                temp.cap = capy;
+                PMArray[PMNO].VMlist.add(temp);
+                PMArray[PMNO].resCap=
+                        PMArray[PMNO].resCap-capy;
+                PMArray[PMNO].VMCount++;
+                
+            
+        
+        
+        
+        
+    }
     boolean checkName(String VMID){
         for(int i=0;i<PMArray.length;i++){
             if(PMArray[i].onState){
@@ -230,6 +248,18 @@ public class PMmodifier {
         return false;
     }
     boolean tryMoving(){
+        for(int i=0;i<PMArray.length;i++){
+            if(PMArray[i].onState){
+            for(int j=0;j<PMArray[i].VMCount;j++){
+                for(int k=PMArray.length-1;k>=0&&k!=i;k--){
+                    if(((VMstruct)PMArray[i].VMlist.get(j)).cap<PMArray[k].resCap){
+                        //addVMA(null, k);
+                        
+                    }
+                }
+            }
+        }
+        }
         return false;
     }
     
