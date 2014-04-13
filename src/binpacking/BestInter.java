@@ -41,6 +41,7 @@ public class BestInter {
                 ((start.getHeight()/2)-(lod.getHeight()/2)));
         start.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         buttonListen();
+        start.setResizable(false);
         start.setVisible(true);        
     }
     

@@ -102,6 +102,7 @@ public class BestInter2 implements MouseListener{
         but[2] = new JButton("consolidate");
         butPanel.add(but[2]);
         addButtonListeners(but);
+        mainWind.setResizable(false);
         mainWind.setVisible(true);
         
         

@@ -53,8 +53,8 @@ public class MyDialogs extends JDialog{
          }
       });
       btnPanel.add(noBtn);
-      input1 = new JTextField(32);
-      input2 = new JTextField();
+      input1 = new JTextField(8);
+      input2 = new JTextField(5);
       getContentPane().add(new JLabel("VM ID"));
       getContentPane().add(input1);
       getContentPane().add(new JLabel("capacity"));
