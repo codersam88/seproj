@@ -20,6 +20,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.UIManager;
@@ -164,12 +165,16 @@ public class BestInter2 implements MouseListener{
                 if(m.areAccepted()){
                     String[] vs ;
                     vs = m.getValues();
+                    if(Integer.parseInt(vs[1])<20){
+                        JOptionPane.showMessageDialog(mainWind, "The VM"
+                                + " capacity should not be less than 20");
+                    }
+                        
+                    else{
                     pmr.addVMA(vs[0], Integer.parseInt(vs[1]));
                     remove();
-                    //mainWind.removeAll();
-                    //mainWind.revalidate();
-                    //mainWind.repaint();
                     buildGUI();
+                    }
                 }
                 
             }
@@ -193,11 +198,15 @@ public class BestInter2 implements MouseListener{
 
             @Override
             public void actionPerformed(ActionEvent ae) {
+                if(JOptionPane.YES_OPTION==JOptionPane.showConfirmDialog(PMPanel, 
+                            "Sure about consolidating>",
+                            "consolidation",JOptionPane.YES_NO_OPTION)){
                 if(pmr.consolidate()){
                     //System.out.println("entered");
                     
                     remove();
                     buildGUI();
+                }
                 }
             }
         });
@@ -223,8 +232,11 @@ public class BestInter2 implements MouseListener{
                 pmr.changeState(i);
                 }
                 else{
-                    
+                    if(JOptionPane.YES_OPTION==JOptionPane.showConfirmDialog(PMPanel, 
+                            "Sure about switching off?",
+                            "Switch Off",JOptionPane.YES_NO_OPTION)){
                     pmr.switchOFFPM(i);
+                    }
                 }
                 remove();
                 buildGUI();
