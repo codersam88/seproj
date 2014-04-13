@@ -105,7 +105,7 @@ public class PMmodifier {
             }
         }*/
         for(;i<PMArray.length;i++){
-            //System.out.println("in addvma "+PMArray[i]);
+            //System.out.println("in addvma "+tmp[i]);
             if(PMArray[i].resCap >= capy){
                 //if(!((PMstruct)PMlist.get(i)).onState){
                     //System.err.println("changing state of pm "+((PMstruct)PMlist.get(i)).PM_NO);
@@ -134,14 +134,14 @@ public class PMmodifier {
         }
         
     }
-    protected void addVMA(int PMNO,String VM_ID, int capy){       
+    protected void addVMA(PMstruct[] tmp,int PMNO,String VM_ID, int capy){       
                 VMstruct temp = new VMstruct();
                 temp.VM_ID = VM_ID;
                 temp.cap = capy;
-                PMArray[PMNO].VMlist.add(temp);
-                PMArray[PMNO].resCap=
-                        PMArray[PMNO].resCap-capy;
-                PMArray[PMNO].VMCount++;
+                tmp[PMNO].VMlist.add(temp);
+                tmp[PMNO].resCap=
+                        tmp[PMNO].resCap-capy;
+                tmp[PMNO].VMCount++;
     }
     boolean checkName(String VMID){
         for(int i=0;i<PMArray.length;i++){
@@ -165,6 +165,16 @@ public class PMmodifier {
         return VM_ID;
     }
     
+    void deleteVM(PMstruct[] tmp,int PMNo,int VMNo){
+        int freed = ((VMstruct)tmp[PMNo].VMlist.get(VMNo)).cap;
+        tmp[PMNo].VMlist.remove(VMNo);
+        tmp[PMNo].VMCount--;
+        
+        tmp[PMNo].resCap = tmp[PMNo].resCap + freed;
+        if(tmp[PMNo].VMCount==0){
+            tmp[PMNo].onState=false;
+        }
+    }
     void deleteVM(int PMNo,int VMNo){
         int freed = ((VMstruct)PMArray[PMNo].VMlist.get(VMNo)).cap;
         PMArray[PMNo].VMlist.remove(VMNo);
@@ -230,27 +240,51 @@ public class PMmodifier {
         return ((VMstruct)PMArray[i].VMlist.get(j)).cap;
     }
     
-    boolean consolidate(){
-        PMstruct[] tmp=new PMstruct[pmCount];
+    PMstruct[] copy(){
+        PMstruct[] tmp = new PMstruct[pmCount];
         for(int i=0;i<pmCount;i++){
-            tmp[i]=PMArray[i];
+            tmp[i]=new PMstruct();
+            tmp[i].PM_NO=PMArray[i].PM_NO;
+            tmp[i].resCap=PMArray[i].resCap;
+            tmp[i].VMCount=PMArray[i].VMCount;
+            tmp[i].onState=PMArray[i].onState;
+            for(int j=0;j<PMArray[i].VMCount;j++){
+                VMstruct temp = new VMstruct();
+                temp.VM_ID = ((VMstruct)PMArray[i].VMlist.get(j)).VM_ID;
+                temp.cap = ((VMstruct)PMArray[i].VMlist.get(j)).cap;
+                tmp[i].VMlist.add(temp);
+                
+            }
         }
+        return tmp;
+    }
+    
+    boolean consolidate(){
+        PMstruct[] tmp=copy();
+        System.out.println(tmp);
+        System.out.println(PMArray);
+        
         sort(tmp);
         if(tryMoving(tmp)){
+            System.out.println("here");
+            sort(PMArray);
+            tryMoving(PMArray);
             return true;
         }
         //PMArray=tmp;
         return false;
     }
     boolean tryMoving(PMstruct[] temp){
+        
         for(int i=0;i<temp.length;i++){
             if(temp[i].onState){
+                System.out.println("here");
             for(int j=0;j<temp[i].VMCount;j++){
                 for(int k=temp.length-1;k>=0&&k!=i;k--){
                     if(((VMstruct)temp[i].VMlist.get(j)).cap<temp[k].resCap){
-                        addVMA(k,((VMstruct)temp[i].VMlist.get(j)).VM_ID,
+                        addVMA(temp,k,((VMstruct)temp[i].VMlist.get(j)).VM_ID,
                                 ((VMstruct)temp[i].VMlist.get(j)).cap);
-                        deleteVM(i, j);
+                        deleteVM(temp,i, j);
                         if(temp[i].VMCount==0){
                             return true;
                         }

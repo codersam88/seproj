@@ -22,6 +22,7 @@ public class PMstruct {
     VMstruct[] VMArray;
 
     public PMstruct() {
+        
         VMlist = new LinkedList();
         VMArray= new VMstruct[5];
     }
