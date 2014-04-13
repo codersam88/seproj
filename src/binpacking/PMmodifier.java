@@ -99,32 +99,40 @@ public class PMmodifier {
     protected void addVMA(String VM_ID, int capy){
         if(checkName(VM_ID)){
         int i=0;
-        /*for(;i<PMlist.size();i++){
-            for(int j=0;j<((PMstruct)PMlist.get(i)).VMlist.size();j++){
-                
-            }
-        }*/
         for(;i<PMArray.length;i++){
-            //System.out.println("in addvma "+tmp[i]);
-            if(PMArray[i].resCap >= capy){
-                //if(!((PMstruct)PMlist.get(i)).onState){
-                    //System.err.println("changing state of pm "+((PMstruct)PMlist.get(i)).PM_NO);
-                    PMArray[i].onState=true;
-                    //System.out.println("state now "+((PMstruct)PMlist.get(i)).onState);
-                    //System.out.println("state now next state "+((PMstruct)PMlist.get(i+1)).onState);
-                    //System.err.println(((PMstruct)PMlist.get(i)).onState);
-                //}
-                VMstruct temp = new VMstruct();
+            if(PMArray[i].onState){
+              if(PMArray[i].resCap >= capy){
+                PMArray[i].onState=true;
+                     VMstruct temp = new VMstruct();
                 temp.VM_ID = VM_ID;
                 temp.cap = capy;
                 PMArray[i].VMlist.add(temp);
                 PMArray[i].resCap=
                         PMArray[i].resCap-capy;
                 PMArray[i].VMCount++;
-                //System.out.println("VM has been added in pm no "+ 
-                  //      ((PMstruct)PMlist.get(i)).PM_NO);
-                //System.out.println("the residual cap of pm is "+ 
-                  //      ((PMstruct)PMlist.get(i)).resCap);
+                break;  
+            }
+        }
+        }
+        
+        if(i==PMArray.length){
+           addInOff(VM_ID,  capy);
+        }
+        }
+        
+    }
+        void addInOff(String VM_ID, int capy){
+           int i=0;
+        for(;i<PMArray.length;i++){
+            if(PMArray[i].resCap >= capy){
+                PMArray[i].onState=true;
+                     VMstruct temp = new VMstruct();
+                temp.VM_ID = VM_ID;
+                temp.cap = capy;
+                PMArray[i].VMlist.add(temp);
+                PMArray[i].resCap=
+                        PMArray[i].resCap-capy;
+                PMArray[i].VMCount++;
                 break;
             }
         }
@@ -132,8 +140,8 @@ public class PMmodifier {
             System.out.println("sorry no enough space");
         }
         }
-        
-    }
+    
+    
     protected void addVMA(PMstruct[] tmp,int PMNO,String VM_ID, int capy){       
                 VMstruct temp = new VMstruct();
                 temp.VM_ID = VM_ID;
@@ -154,17 +162,6 @@ public class PMmodifier {
         }
         return true;
     }
-    String genVMID(){
-        String VM_ID="VM_";
-        if(VM_num<9){
-            VM_ID=VM_ID+"0"+VM_num;
-        }
-        else{
-            VM_ID=VM_ID+VM_num;
-        }
-        return VM_ID;
-    }
-    
     void deleteVM(PMstruct[] tmp,int PMNo,int VMNo){
         int freed = ((VMstruct)tmp[PMNo].VMlist.get(VMNo)).cap;
         tmp[PMNo].VMlist.remove(VMNo);
@@ -208,27 +205,7 @@ public class PMmodifier {
     }
     
     
-    /*int getPMCount(){
-        return PMlist.size();
-    }
-    String getPMID(int i){
-        return "PM"+((PMstruct)PMlist.get(i)).PM_NO;
-    }
     
-    boolean getOnStatus(int i){
-        System.out.println("in geton "+((PMstruct)PMlist.get(i)).onState);
-        System.out.println("i value here "+ i);
-        return ((PMstruct)PMlist.get(i)).onState;
-        
-    }
-    
-    int getResCap(int i){
-        return ((PMstruct)PMlist.get(i)).resCap;
-    }
-    
-    String getPMNo(int i){
-        return ((PMstruct)PMlist.get(i)).PM_NO;
-    }*/
     int getVMCount(int i){
         return PMArray[i].VMCount;
     }
@@ -261,12 +238,8 @@ public class PMmodifier {
     
     boolean consolidate(){
         PMstruct[] tmp=copy();
-        System.out.println(tmp);
-        System.out.println(PMArray);
-        
         sort(tmp);
         if(tryMoving(tmp)){
-            System.out.println("here");
             sort(PMArray);
             tryMoving(PMArray);
             order();
@@ -279,8 +252,6 @@ public class PMmodifier {
         for(int i=0;i<pmCount;i++){
             for(int j=0;j<pmCount;j++){
                 PMstruct tmp=PMArray[i];
-                System.out.println(PMArray[i].PM_NO);
-                System.out.println("PM "+(j+1));
                 if(PMArray[i].PM_NO.equals("PM "+(j+1))){
                     PMArray[i]=PMArray[j];
                     PMArray[j]=tmp;
@@ -292,10 +263,9 @@ public class PMmodifier {
         
         for(int i=0;i<temp.length;i++){
             if(temp[i].onState){
-                //System.out.println("here");
             for(int j=0;j<temp[i].VMCount;j++){
                 for(int k=temp.length-1;k>=0&&k!=i;k--){
-                    if(((VMstruct)temp[i].VMlist.get(j)).cap<temp[k].resCap){
+                    if(((VMstruct)temp[i].VMlist.get(j)).cap<=temp[k].resCap){
                         addVMA(temp,k,((VMstruct)temp[i].VMlist.get(j)).VM_ID,
                                 ((VMstruct)temp[i].VMlist.get(j)).cap);
                         deleteVM(temp,i, j);
@@ -325,10 +295,8 @@ public class PMmodifier {
             }        
         }
         for(int i=0;i<temp.length;i++){
-            //System.out.println(temp[i].resCap+" ");
-        }
-        //System.out.println("after sorting");
-        
+         }
+         
         return temp;
     }
 }
