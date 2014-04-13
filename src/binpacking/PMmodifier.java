@@ -30,7 +30,7 @@ public class PMmodifier {
         PMlist = new LinkedList();
         for(int i = 0;i<totalPMs;i++){
             PMlist.add(new PMstruct());
-            ((PMstruct)PMlist.get(i)).PM_NO="PM_"+(i+1);
+            ((PMstruct)PMlist.get(i)).PM_NO="PM "+(i+1);
             ((PMstruct)PMlist.get(i)).resCap=100;
             //((PMstruct)PMlist.get(i)).onState=true;
         }
@@ -41,7 +41,7 @@ public class PMmodifier {
         for(int i = 0;i<pmCount;i++){
             PMArray[i]= new PMstruct();
             //System.out.println("in initing "+PMArray[i]);
-            PMArray[i].PM_NO="PM_"+(i+1);
+            PMArray[i].PM_NO="PM "+(i+1);
             PMArray[i].resCap=100;
             //System.out.println(PMArray[i]);
             //((PMstruct)PMlist.get(i)).onState=true;
@@ -269,16 +269,30 @@ public class PMmodifier {
             System.out.println("here");
             sort(PMArray);
             tryMoving(PMArray);
+            order();
             return true;
         }
         //PMArray=tmp;
         return false;
     }
+    void order(){
+        for(int i=0;i<pmCount;i++){
+            for(int j=0;j<pmCount;j++){
+                PMstruct tmp=PMArray[i];
+                System.out.println(PMArray[i].PM_NO);
+                System.out.println("PM "+(j+1));
+                if(PMArray[i].PM_NO.equals("PM "+(j+1))){
+                    PMArray[i]=PMArray[j];
+                    PMArray[j]=tmp;
+                }
+            }
+        }
+    }
     boolean tryMoving(PMstruct[] temp){
         
         for(int i=0;i<temp.length;i++){
             if(temp[i].onState){
-                System.out.println("here");
+                //System.out.println("here");
             for(int j=0;j<temp[i].VMCount;j++){
                 for(int k=temp.length-1;k>=0&&k!=i;k--){
                     if(((VMstruct)temp[i].VMlist.get(j)).cap<temp[k].resCap){

@@ -201,7 +201,7 @@ public class BestInter2 implements MouseListener{
             @Override
             public void actionPerformed(ActionEvent ae) {
                 if(pmr.consolidate()){
-                    System.out.println("entered");
+                    //System.out.println("entered");
                     
                     remove();
                     buildGUI();
