@@ -96,8 +96,9 @@ public class PMmodifier {
     void changeState(int i){
         PMArray[i].onState=true;
     }
-    protected void addVMA(String VM_ID, int capy){
+    protected int addVMA(String VM_ID, int capy){
         if(checkName(VM_ID)){
+            capy=(int)Math.ceil(capy);
         int i=0;
         for(;i<PMArray.length;i++){
             if(PMArray[i].onState){
@@ -118,6 +119,10 @@ public class PMmodifier {
         if(i==PMArray.length){
            addInOff(VM_ID,  capy);
         }
+        return 0;
+        }
+        else{
+            return 1;//for no enough space
         }
         
     }

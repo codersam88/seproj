@@ -165,13 +165,17 @@ public class BestInter2 implements MouseListener{
                 if(m.areAccepted()){
                     String[] vs ;
                     vs = m.getValues();
-                    if(Integer.parseInt(vs[1])<20){
+                    if(Float.parseFloat(vs[1])<20){
                         JOptionPane.showMessageDialog(mainWind, "The VM"
                                 + " capacity should not be less than 20");
                     }
                         
                     else{
-                    pmr.addVMA(vs[0], Integer.parseInt(vs[1]));
+                    int err=pmr.addVMA(vs[0], (int)Math.ceil(Float.parseFloat(vs[1])));
+                    if(err==1){
+                        JOptionPane.showMessageDialog(mainWind, "There exists "
+                                + "a VM with same ID choose another");
+                    }
                     remove();
                     buildGUI();
                     }
