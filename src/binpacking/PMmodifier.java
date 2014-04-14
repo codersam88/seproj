@@ -12,87 +12,21 @@ import java.util.LinkedList;
  */
 public class PMmodifier {
     private final int pmCount=6;
-    private int PM_ID;
-    private LinkedList PMlist;
     private static PMstruct[] PMArray;
     private LinkedList VMlist;
     private VMstruct[] VMArray;
     int VM_num=0;
 
-    public PMmodifier() {
-        
-        //System.out.println("initing");
-        
-    }
     
-    
-    void initPMs(int totalPMs){
-        PMlist = new LinkedList();
-        for(int i = 0;i<totalPMs;i++){
-            PMlist.add(new PMstruct());
-            ((PMstruct)PMlist.get(i)).PM_NO="PM "+(i+1);
-            ((PMstruct)PMlist.get(i)).resCap=100;
-            //((PMstruct)PMlist.get(i)).onState=true;
-        }
-        //System.out.println("the size of list is "+PMlist.size());
-    }
     void initPMsA(){
         PMArray=new PMstruct[pmCount];
         for(int i = 0;i<pmCount;i++){
             PMArray[i]= new PMstruct();
-            //System.out.println("in initing "+PMArray[i]);
             PMArray[i].PM_NO="PM "+(i+1);
             PMArray[i].resCap=100;
-            //System.out.println(PMArray[i]);
-            //((PMstruct)PMlist.get(i)).onState=true;
         }
-        //System.out.println("the size of list is "+PMlist.size());
     }
     
-    public static void main(String[] args){
-        PMmodifier pm = new PMmodifier();
-        
-        pm.addVM("VM 1", 20);
-        pm.addVM("VM 2",90);
-        pm.addVM("VM 3", 50);
-        pm.addVM("VM 4", 60);
-        pm.addVM("VM 5", 60);
-    }
-    
-    protected void addVM(String VM_ID, int capy){
-        int i=0;
-        /*for(;i<PMlist.size();i++){
-            for(int j=0;j<((PMstruct)PMlist.get(i)).VMlist.size();j++){
-                
-            }
-        }*/
-        for(;i<PMlist.size();i++){
-            if(((PMstruct)PMlist.get(i)).resCap >= capy){
-                //if(!((PMstruct)PMlist.get(i)).onState){
-                    //System.err.println("changing state of pm "+((PMstruct)PMlist.get(i)).PM_NO);
-                    ((PMstruct)PMlist.get(i)).onState=true;
-                    System.out.println("state now "+((PMstruct)PMlist.get(i)).onState);
-                    System.out.println("state now next state "+((PMstruct)PMlist.get(i+1)).onState);
-                    //System.err.println(((PMstruct)PMlist.get(i)).onState);
-                //}
-                VMstruct temp = new VMstruct();
-                temp.VM_ID = VM_ID;
-                temp.cap = capy;
-                ((PMstruct)PMlist.get(i)).VMlist.add(temp);
-                ((PMstruct)PMlist.get(i)).resCap=
-                        ((PMstruct)PMlist.get(i)).resCap-capy;
-                //System.out.println("VM has been added in pm no "+ 
-                  //      ((PMstruct)PMlist.get(i)).PM_NO);
-                //System.out.println("the residual cap of pm is "+ 
-                  //      ((PMstruct)PMlist.get(i)).resCap);
-                break;
-            }
-        }
-        if(i==PMlist.size()){
-            System.out.println("sorry no enough space");
-        }
-        
-    }
     void changeState(int i){
         PMArray[i].onState=true;
     }
@@ -254,13 +188,6 @@ public class PMmodifier {
         if(i>0){
             return true;
         }
-        /*if(tryMoving(tmp)){
-            sort(PMArray);
-            tryMoving(PMArray);
-            order();
-            return true;
-        }*/
-        //PMArray=tmp;
         return false;
     }
     void updatePA(PMstruct[] tmp){
@@ -331,9 +258,6 @@ public class PMmodifier {
             updatePA(tmp);
             return;
         }
-        //for(int j=0;j<tmp[i].VMCount;j++){
-        //    System.out.println(((VMstruct)tmp[i].VMlist.get(j)).VM_ID);
-        //}
         for(int j=0;j<tmp[i].VMCount;j++){
         System.out.println(((VMstruct)tmp[i].VMlist.get(j)).cap);
         }
