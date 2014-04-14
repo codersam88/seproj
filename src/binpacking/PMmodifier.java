@@ -249,6 +249,13 @@ public class PMmodifier {
             }        
         }
         for(int i=0;i<temp.length;i++){
+            int last=temp.length-1;
+            if(temp[i].onState&&temp[i].resCap==100&&i<last){
+                PMstruct tp=temp[i];
+                temp[i]=temp[last];
+                temp[last]=tp;
+                last--;
+            }
          }
          
         return temp;
