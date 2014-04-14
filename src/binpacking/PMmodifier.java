@@ -29,6 +29,7 @@ public class PMmodifier {
     
     void changeState(int i){
         PMArray[i].onState=true;
+        PMArray[i].resCap=100;
     }
     protected int addVMA(String VM_ID, int capy){
         if(checkName(VM_ID)){
@@ -51,7 +52,8 @@ public class PMmodifier {
         }
         
         if(i==PMArray.length){
-           addInOff(VM_ID,  capy);
+           int ret=addInOff(VM_ID,  capy);
+           return ret;
         }
         return 0;
         }
@@ -60,7 +62,7 @@ public class PMmodifier {
         }
         
     }
-        void addInOff(String VM_ID, int capy){
+        int addInOff(String VM_ID, int capy){
            int i=0;
         for(;i<PMArray.length;i++){
             if(PMArray[i].resCap >= capy){
@@ -77,7 +79,9 @@ public class PMmodifier {
         }
         if(i==PMArray.length){
             System.out.println("sorry no enough space");
+            return 2;//for no enough capacity
         }
+        return 0;
         }
     
     
@@ -202,10 +206,8 @@ public class PMmodifier {
                 if(PMArray[i].PM_NO.equals("PM "+(j+1))){
                     
                     PMArray[i]=PMArray[j];
-                    System.out.println("in "+PMArray[i].PM_NO+" goest "+PMArray[j].PM_NO);
                     PMArray[j]=tmp;
-                    if(i==5&&j==5)
-                    System.out.println("in "+PMArray[i].PM_NO+" goest "+PMArray[j].PM_NO);
+                    
                 }
             }
         }
@@ -216,6 +218,7 @@ public class PMmodifier {
             if(temp[i].onState){
             for(int j=0;j<temp[i].VMCount;j++){
                 for(int k=temp.length-1;k>=0&&k!=i;k--){
+                    System.out.println("at this "+temp[k].PM_NO);
                     if(((VMstruct)temp[i].VMlist.get(j)).cap<=temp[k].resCap){
                         addVMA(temp,k,((VMstruct)temp[i].VMlist.get(j)).VM_ID,
                                 ((VMstruct)temp[i].VMlist.get(j)).cap);
@@ -259,18 +262,10 @@ public class PMmodifier {
             return;
         }
         for(int j=0;j<tmp[i].VMCount;j++){
-        System.out.println(((VMstruct)tmp[i].VMlist.get(j)).cap);
-        }
-        System.out.println(tmp[i].VMCount);
-        for(int j=0;j<tmp[i].VMCount;j++){
-            System.out.println(j);
             for(int k=0;k<pmCount;k++){
                 
                 if(!(tmp[k].PM_NO.equals("PM "+(i+1)))){
-                    System.out.println(tmp[i].PM_NO);
-                    
-                    
-                        if(tmp[k].onState){
+                    if(tmp[k].onState){
                             if(((VMstruct)tmp[i].VMlist.get(j)).cap
                             <=tmp[k].resCap){
                             addVMA(tmp, k, ((VMstruct)tmp[i].VMlist.get(j)).VM_ID, 
@@ -278,6 +273,7 @@ public class PMmodifier {
                             deleteVM(tmp, i, j);
                             if(!tmp[i].onState){
                                 updatePA(tmp);
+                                order();
                             }
                         }
                         

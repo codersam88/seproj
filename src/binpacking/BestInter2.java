@@ -85,13 +85,15 @@ public class BestInter2 implements MouseListener{
     void buildGUI(){
         PMCount = pmr.getPMCountA();
         createPMs(PMCount);        
-        but= new JButton[3];
+        but= new JButton[4];
         but[0] = new JButton("add VM");
         butPanel.add(but[0]);
         but[1] = new JButton("delete VM");
         butPanel.add(but[1]);
         but[2] = new JButton("consolidate");
         butPanel.add(but[2]);
+        but[3] = new JButton("Exit");
+        butPanel.add(but[3]);
         addButtonListeners(but);
         
 //        scrPane= new JScrollPane();
@@ -163,23 +165,37 @@ public class BestInter2 implements MouseListener{
             public void actionPerformed(ActionEvent ae) {
                 MyDialogs m=new MyDialogs(mainWind, "Enter VM ID and capacity");
                 if(m.areAccepted()){
+                    
                     String[] vs ;
                     vs = m.getValues();
-                    if(Float.parseFloat(vs[1])<20){
+                    if((vs[0]==null || vs[1]==null)){
+                        JOptionPane.showMessageDialog(mainWind, "Please "
+                                + "enter both the values");
+                    }
+                    
+                    
+                    else if(Float.parseFloat(vs[1])<20||Float.parseFloat(vs[1])>100){
+                    
                         JOptionPane.showMessageDialog(mainWind, "The VM"
-                                + " capacity should not be less than 20");
+                                + " capacity should not be less than 20 and "
+                                + "greater than 100");
                     }
                         
-                    else{
+                    else {
                     int err=pmr.addVMA(vs[0], (int)Math.ceil(Float.parseFloat(vs[1])));
                     if(err==1){
                         JOptionPane.showMessageDialog(mainWind, "There exists "
                                 + "a VM with same ID choose another");
                     }
+                    else if(err==2){
+                        JOptionPane.showMessageDialog(mainWind, "Sorry no enogh "
+                                + "capacity to add a VM");
+                    }
                     remove();
                     buildGUI();
                     }
                 }
+                
                 
             }
         });
@@ -214,6 +230,14 @@ public class BestInter2 implements MouseListener{
                 }
             }
         });
+        
+        buts[3].addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                System.exit(2);
+            }
+        });
     }
     
     void remove(){
@@ -221,7 +245,7 @@ public class BestInter2 implements MouseListener{
             PMPanel.remove(PMArr[i]);
             PMidPanel.remove(PMidLabels[i]);
         }
-        for(int j=0;j<3;j++){
+        for(int j=0;j<4;j++){
             butPanel.remove(but[j]);
         }
         

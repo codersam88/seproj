@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -74,6 +75,13 @@ public class MyDialogs extends JDialog{
    private void okButton() {
       value1 = input1.getText();
       value2 = input2.getText();
+      try{
+          float f=Float.parseFloat(value2);
+      }
+      catch(java.lang.NumberFormatException e){
+          JOptionPane.showMessageDialog(this, "Please insert "
+                  + "only numbers for capacity");
+      }
       valueAccepted=true;
       dispose();
    }
