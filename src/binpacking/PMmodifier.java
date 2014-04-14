@@ -109,9 +109,8 @@ public class PMmodifier {
         int freed = ((VMstruct)tmp[PMNo].VMlist.get(VMNo)).cap;
         tmp[PMNo].VMlist.remove(VMNo);
         tmp[PMNo].VMCount--;
-        
         tmp[PMNo].resCap = tmp[PMNo].resCap + freed;
-        if(tmp[PMNo].VMCount==0){
+        if(tmp[PMNo].VMCount==0||tmp[PMNo].resCap==100){
             tmp[PMNo].onState=false;
         }
     }
@@ -270,7 +269,7 @@ public class PMmodifier {
         }
         for(int j=0;j<tmp[i].VMCount;j++){
             for(int k=0;k<pmCount;k++){
-                
+                try{
                 if(!(tmp[k].PM_NO.equals("PM "+(i+1)))){
                     if(tmp[k].onState){
                             if(((VMstruct)tmp[i].VMlist.get(j)).cap
@@ -285,6 +284,9 @@ public class PMmodifier {
                         }
                         
                     }
+                }}
+                catch(java.lang.IndexOutOfBoundsException e){
+                    System.out.println(tmp[i].PM_NO);
                 }
             }
         }
