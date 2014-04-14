@@ -17,6 +17,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -26,10 +27,12 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class BestInter {
     
+    
     JFrame start;
     JButton lod;
+    BestInter b;
     
-    BestInter() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException{
+    void makeUI() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException{
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         start = new JFrame("Choose File");
         start.getContentPane().setLayout(null);
@@ -48,6 +51,7 @@ public class BestInter {
     public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
         
         BestInter b = new BestInter();
+        b.makeUI();
         b.buttonListen();
         
     }
@@ -61,18 +65,22 @@ public class BestInter {
                 if(isFileChosen == JFileChooser.APPROVE_OPTION){
                     File fil = fc.getSelectedFile();
                     try {
-                        new Parse(fil);
+                        int ret=new Parse2().StartP(fil);
+                        if(ret==0){
                         start.dispose();
-                        new BestInter2();
+                            try {
+                                BestInter2 b=new BestInter2();
+                            } catch (ClassNotFoundException ex) {
+                                Logger.getLogger(BestInter.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (InstantiationException ex) {
+                                Logger.getLogger(BestInter.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (IllegalAccessException ex) {
+                                Logger.getLogger(BestInter.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (UnsupportedLookAndFeelException ex) {
+                                Logger.getLogger(BestInter.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
                     } catch (IOException ex) {
-                        Logger.getLogger(BestInter.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(BestInter.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (InstantiationException ex) {
-                        Logger.getLogger(BestInter.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (IllegalAccessException ex) {
-                        Logger.getLogger(BestInter.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (UnsupportedLookAndFeelException ex) {
                         Logger.getLogger(BestInter.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     
@@ -82,5 +90,18 @@ public class BestInter {
         });
         
     }
+    void errors(int errNO) throws ClassNotFoundException{
+    if(errNO==1){
+        JOptionPane.showMessageDialog(start, "wrong format");
+        
+    }
+    else if(errNO==2){
+        JOptionPane.showMessageDialog(start, "empty file");
+    }
+    else if(errNO==3){
+        JOptionPane.showMessageDialog(start, "capacity should be between 20 and 100");
+    }
+    
+}
     
 }

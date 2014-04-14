@@ -49,9 +49,15 @@ public class Parse {
         scanL.useDelimiter("=");
         if(scanL.hasNext()){
             String VM_ID = scanL.next();
+            try{
             int cap = Integer.parseInt(scanL.next());
-            //System.out.println(VM_ID+" "+cap);
             pmr.addVMA(VM_ID, cap);
+            }
+            catch(java.util.NoSuchElementException e){
+                
+            }
+            //System.out.println(VM_ID+" "+cap);
+            
             
             
             
