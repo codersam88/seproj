@@ -34,7 +34,11 @@ public class Parse2 {
         for(;scan.hasNextLine();){
             //System.out.println(scan.next());
             try {
-               parseCurrLine(scan.nextLine());
+                String line = scan.nextLine().trim();
+                if(line.equals("")){
+                    continue;
+                }
+               parseCurrLine(line);
                if(ec==1){
                    return 1;
                }
@@ -57,11 +61,11 @@ public class Parse2 {
         int c=0,d=0,f=0;
         if(scanL.hasNext()){
             c=1;
-            String VM_ID = scanL.next();
+            String VM_ID = (scanL.next()).trim();
             
             try{if(scanL.hasNext()){
                d=1;
-            int cap = Integer.parseInt(scanL.next());
+            int cap = Integer.parseInt(scanL.next().trim());
             if(cap<20||cap>100){
                 ec=1;
                 b1.errors(3);
