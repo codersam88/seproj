@@ -35,6 +35,9 @@ public class Parse2 {
             //System.out.println(scan.next());
             try {
                parseCurrLine(scan.nextLine());
+               if(ec==1){
+                   return 1;
+               }
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Parse2.class.getName()).log(Level.SEVERE, null, ex);
             } catch (InstantiationException ex) {
